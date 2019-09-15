@@ -29,8 +29,6 @@ public class ThirdActivity extends AppCompatActivity {
     private ListView mylist;
     private ListAdapter adapter;
 
-    private List<ListItem> items;
-
     private EditText titleTextBox;
     private EditText descriptionTextBox;
     private ImageView imageView;
@@ -50,9 +48,9 @@ public class ThirdActivity extends AppCompatActivity {
         addButton = (Button) findViewById(R.id.addButton);
         buttonChangeActivityButton = (Button) findViewById(R.id.changeActivityButton);
 
-        items = new ArrayList<>();
+        List<ListItem> items = /*new ArrayList<>()*/ ListItem.PopulateWithItems();
 
-        items.add(new ListItem("sfdgdfg", R.drawable.ic_launcher_background, "adassd"));
+//        items.add(new ListItem("temp", R.drawable.ic_launcher_background, "temporary"));
 
         adapter = new ListAdapter(this, items);
         mylist.setAdapter(adapter);
@@ -67,7 +65,7 @@ public class ThirdActivity extends AppCompatActivity {
             String title = titleTextBox.getText().toString();
             String description = descriptionTextBox.getText().toString();
             int image = (int)imageView.getTag();
-            items.add(new ListItem(title, image, description));
+            adapter.add(new ListItem(title, image, description));
             adapter.notifyDataSetChanged();
         }
     };
@@ -78,7 +76,7 @@ public class ThirdActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, FourthActivity.class);
-            intent.putExtra("data", (Serializable) items);
+            intent.putExtra("data", (Serializable) adapter.getItems());
             context.startActivity(intent);
         }
     };

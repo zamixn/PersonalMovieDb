@@ -10,6 +10,9 @@
     <string name="imageLabel">Image</string>
     <string name="addButton">Add</string>
     <string name="changeActivity">Change Activity</string>
-
     <string name="thirdActivityButton">Third Activity</string>
+    <string name="sortLabel">Sort Alphabetically</string>
+    <string name="filterByFirstLetter">Filter by first letter</string>
+    <string name="sortedLabelAsc">Asc</string>
+    <string name="sortedLabelDesc">Desc</string>
 </resources>

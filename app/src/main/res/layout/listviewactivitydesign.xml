@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+
+    <RelativeLayout
+        android:id="@+id/topHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/filterEditText"
+            android:layout_width="@dimen/filterByFirstLetterWidth"
+            android:layout_height="wrap_content"
+            android:hint="@string/filterByFirstLetter"
+            android:gravity="center_horizontal"
+            android:inputType="textNoSuggestions"/>
+
+        <Button
+            android:id="@+id/sortButton"
+            android:layout_width="@dimen/sortArrowSize"
+            android:layout_height="@dimen/sortArrowSize"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/filterEditText"
+            android:layout_toRightOf="@+id/filterEditText"
+            android:background="@drawable/sortarrows"
+            android:layout_marginLeft="50dp"/>
+
+        <TextView
+            android:id="@+id/sortedTextView"
+            android:layout_width="@dimen/sortedLabelWidth"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/sortButton"
+            android:layout_toEndOf="@+id/sortButton"
+            android:layout_toRightOf="@+id/sortButton"
+            android:text="@string/sortedLabelAsc" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topHeader">
+
+    </ListView>
+
+</RelativeLayout>
