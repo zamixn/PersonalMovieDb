@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">PersonalMovieDb</string>
+
+    <string name="toggleButton">Toggle</string>
+    <string name="textfield">Text Field</string>
+    <string name="secondActivityButton">Second Activity</string>
+
+    <string name="titleLabel">Title</string>
+    <string name="descriptionLabel">Description</string>
+    <string name="imageLabel">Image</string>
+    <string name="addButton">Add</string>
+    <string name="changeActivity">Change Activity</string>
+
+    <string name="thirdActivityButton">Third Activity</string>
+</resources>
