@@ -1,12 +1,10 @@
-package com.zkadisa.personalmoviedb;
+package com.zkadisa.personalmoviedb.L1;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,6 +13,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.zkadisa.personalmoviedb.R;
 
 import java.io.Serializable;
 import java.util.List;

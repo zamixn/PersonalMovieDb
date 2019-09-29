@@ -5,9 +5,9 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/image"/>
+        android:layout_width="@dimen/searchEntryPosterWidth"
+        android:layout_height="@dimen/searchEntryPosterHeight"
+        android:id="@+id/posterImage"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,16 +16,22 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/titleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/yearTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/description"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/typeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textSize="12sp" />
 
     </LinearLayout>

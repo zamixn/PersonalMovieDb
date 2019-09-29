@@ -1,10 +1,12 @@
-package com.zkadisa.personalmoviedb;
+package com.zkadisa.personalmoviedb.L1;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.zkadisa.personalmoviedb.R;
 
 import java.util.ArrayList;
 import java.util.List;

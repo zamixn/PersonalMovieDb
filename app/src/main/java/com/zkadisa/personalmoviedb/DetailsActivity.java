@@ -1,36 +1,65 @@
 package com.zkadisa.personalmoviedb;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+import com.zkadisa.personalmoviedb.DataHandling.Entry;
+import com.zkadisa.personalmoviedb.DataHandling.OMDbReader;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    private ImageView imageView;
-    private TextView titleView;
-    private TextView descriptionView;
+    private Context context = this;
+
+    private ImageView poster_imageView;
+    private TextView title_textView;
+    private TextView plot_textView;
+
+    private Gson gson = new Gson();
 
     @Override
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detailsactivitydesign);
 
-        imageView = (ImageView) findViewById(R.id.imageView);
-        titleView = (TextView) findViewById(R.id.titleView);
-        descriptionView = (TextView) findViewById(R.id.descriptionView);
+        poster_imageView = findViewById(R.id.poster_imageView);
+        title_textView = findViewById(R.id.titleTextView);
+        plot_textView = findViewById(R.id.descriptionTextView);
 
         Intent intent = getIntent();
 
-        ListItem item = (ListItem) intent.getSerializableExtra("data");
+        SearchEntryListItem item = (SearchEntryListItem) intent.getSerializableExtra("data");
 
+        title_textView.setText(item.getTitle());
 
-        titleView.setText(item.getTitle());
-        descriptionView.setText(item.getDescription());
-        imageView.setImageResource(item.getImageId());
+        Ion.with(poster_imageView)
+                .placeholder(R.drawable.loadingimage)
+                .error(R.drawable.errorloadingimage)
+                .load(item.getPoster());
+
+        Ion.with(context)
+                .load(OMDbReader.GetSearchByIDURL(item.getImdbID()))
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        if(e != null){
+                            Log.e("Details Activity", e.getMessage());
+                            return;
+                        }
+
+                        Entry entry = gson.fromJson(result.toString(), Entry.class);
+                        plot_textView.setText(entry.Plot);
+                    }
+                });
     }
 }

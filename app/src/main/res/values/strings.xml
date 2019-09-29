@@ -15,4 +15,6 @@
     <string name="filterByFirstLetter">Filter by first letter</string>
     <string name="sortedLabelAsc">Asc</string>
     <string name="sortedLabelDesc">Desc</string>
+    <string name="lab1ButtonText">L1</string>
+    <string name="searchLabel">Search</string>
 </resources>

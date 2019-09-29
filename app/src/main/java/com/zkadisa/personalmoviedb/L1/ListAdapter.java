@@ -1,4 +1,4 @@
-package com.zkadisa.personalmoviedb;
+package com.zkadisa.personalmoviedb.L1;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.zkadisa.personalmoviedb.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,4 +1,6 @@
-package com.zkadisa.personalmoviedb;
+package com.zkadisa.personalmoviedb.L1;
+
+import com.zkadisa.personalmoviedb.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
