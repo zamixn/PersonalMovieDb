@@ -20,14 +20,24 @@
             android:inputType="textNoSuggestions"/>
 
         <Button
+            android:id="@+id/defenseTaskButton"
+            android:layout_width="@dimen/defenseTaskButtonWidth"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/filterEditText"
+            android:layout_toRightOf="@+id/filterEditText"
+            android:text="@string/defenseTaskButtonText"
+            android:layout_marginLeft="25dp"/>
+        
+        <Button
             android:id="@+id/sortButton"
             android:layout_width="@dimen/sortArrowSize"
             android:layout_height="@dimen/sortArrowSize"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/filterEditText"
-            android:layout_toRightOf="@+id/filterEditText"
+            android:layout_toEndOf="@+id/defenseTaskButton"
+            android:layout_toRightOf="@+id/defenseTaskButton"
             android:background="@drawable/sortarrows"
-            android:layout_marginLeft="50dp"/>
+            android:layout_marginLeft="25dp"/>
 
         <TextView
             android:id="@+id/sortedTextView"

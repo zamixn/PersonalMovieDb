@@ -2,11 +2,12 @@
 <resources>
     <dimen name="sortArrowSize">30dp</dimen>
     <dimen name="sortedLabelWidth">40dp</dimen>
-    <dimen name="filterByFirstLetterWidth">200dp</dimen>
+    <dimen name="filterByFirstLetterWidth">160dp</dimen>
     <dimen name="mainLogoWidth">100dp</dimen>
     <dimen name="labWorksButtonWidth">100dp</dimen>
     <dimen name="mainButtonTextSize">20sp</dimen>
     <dimen name="lookingGlassSize">30dp</dimen>
     <dimen name="searchEntryPosterWidth">120dp</dimen>
     <dimen name="searchEntryPosterHeight">165dp</dimen>
+    <dimen name="defenseTaskButtonWidth">75dp</dimen>
 </resources>

@@ -1,6 +1,7 @@
 package com.zkadisa.personalmoviedb.L1;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class ListAdapter extends ArrayAdapter<ListItem> implements Filterable {
     public ListAdapter(Context context, List<ListItem> objects){
         super(context, R.layout.listitemdesign, objects);
         this.mList = objects;
-        this.filteredList = objects;
+        this.filteredList = new ArrayList(objects);
     }
 
     public int getCount(){
@@ -38,11 +39,28 @@ public class ListAdapter extends ArrayAdapter<ListItem> implements Filterable {
         return mList;
     }
 
+    public void removeEverySecondItem(){
+        Log.i("info", filteredList.size() + " " + mList.size());
+        List<ListItem> _mList = new ArrayList<>();
+        for (int i = 0; i != filteredList.size(); i++) {
+            if ((i + 1) % 2 == 0){
+                _mList.add(filteredList.get(i));
+            }
+        }
+        filteredList = _mList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public void sort(Comparator<? super ListItem> comparator){
         Collections.sort(filteredList, comparator);
         Collections.sort(mList, comparator);
         notifyDataSetChanged();
+    }
+
+    public void remove(ListItem item){
+        mList.remove(item);
+        //filteredList.remove(item);
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.zkadisa.personalmoviedb.DataHandling.OMDbReader;
 import com.zkadisa.personalmoviedb.R;
 
 import java.io.Serializable;
@@ -30,6 +32,8 @@ public class FourthActivity extends AppCompatActivity {
     private ListView mylist;
     private ListAdapter adapter;
 
+    private Button defenseTaskButton;
+
     private Context context = this;
 
     @Override
@@ -39,6 +43,7 @@ public class FourthActivity extends AppCompatActivity {
         mylist = (ListView) findViewById(R.id.listView);
         filterText = (EditText) findViewById(R.id.filterEditText);
         sortButton = (Button) findViewById(R.id.sortButton);
+        defenseTaskButton = findViewById(R.id.defenseTaskButton);
         sortedLabelTextView = (TextView) findViewById(R.id.sortedTextView);
         sortedLabelTextView.setText("");
 
@@ -88,6 +93,13 @@ public class FourthActivity extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable editable) { }
+        });
+
+        defenseTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapter.removeEverySecondItem();
+            }
         });
 
     }
