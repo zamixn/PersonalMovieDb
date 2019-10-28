@@ -7,32 +7,34 @@
     <ImageView
         android:layout_width="@dimen/searchEntryPosterWidth"
         android:layout_height="@dimen/searchEntryPosterHeight"
-        android:id="@+id/posterImage"/>
+        android:id="@+id/posterImage"
+        android:background="@color/colorBackground"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_marginLeft="5dp">
 
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/yearTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp" />
+            android:layout_marginTop="5dp"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/typeTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 

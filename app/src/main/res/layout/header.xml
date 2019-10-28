@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:padding="5dp"
+        android:background="@color/colorBackgroundDarkest">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left">
+
+            <ImageButton
+                android:id="@+id/logo"
+                android:layout_width="@dimen/mainLogoWidth"
+                android:layout_height="50dp"
+                android:scaleType="centerInside"
+                android:background="@color/colorBackgroundDarkest"
+                android:src="@drawable/pmdb_logo_txtonly"
+                android:layout_marginRight="20dp"/>
+
+            <Button
+                android:id="@+id/lab1Button"
+                android:layout_width="@dimen/labWorksButtonWidth"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:textSize="@dimen/mainButtonTextSize"
+                android:text="@string/lab1ButtonText"/>
+
+            <Button
+                android:id="@+id/lab2Button"
+                android:layout_width="@dimen/labWorksButtonWidth"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/mainButtonTextSize"
+                android:text="@string/lab2ButtonText"/>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+</merge>

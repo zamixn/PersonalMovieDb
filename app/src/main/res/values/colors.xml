@@ -6,6 +6,7 @@
     colorBackgroundDarkest
     <color name="colorBackground">#241C1C</color>
     <color name="colorBackgroundDark">#1F1A1A</color>
+    <color name="colorBackgroundDarker">#161212</color>
     <color name="colorBackgroundDarkest">#130F0F</color>
     <color name="colorBackgroundBlack">#000000</color>
     <color name="colorText">#FFD6CF</color>
@@ -16,6 +17,10 @@
     <color name="colorButtonTop">#221919</color>
     <color name="colorButtonBottom">#1B1111</color>
     <color name="Gray">#6D6B6B</color>
+    <color name="Orange">#FF3C0A</color>
+    <color name="Red">#FF0A01</color>
+    <color name="LightOrange">#FFA993</color>
+    <color name="Transparent">#00FFA993</color>
 
 
 </resources>

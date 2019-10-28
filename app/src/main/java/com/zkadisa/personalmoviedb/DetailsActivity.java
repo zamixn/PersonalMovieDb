@@ -42,8 +42,8 @@ public class DetailsActivity extends AppCompatActivity {
         title_textView.setText(item.getTitle());
 
         Ion.with(poster_imageView)
-                .placeholder(R.drawable.loadingimage)
-                .error(R.drawable.errorloadingimage)
+                .placeholder(R.drawable.ic_loading_image)
+                .error(R.drawable.ic_error_image)
                 .load(item.getPoster());
 
         Ion.with(context)

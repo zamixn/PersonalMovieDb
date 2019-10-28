@@ -1,28 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/poster_imageView"
+    <com.zkadisa.personalmoviedb.Header
+        android:id="@+id/Header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/loadingimage"/>
+        android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/titleTextView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="title"
-        android:gravity="center"
-        android:textSize="32dp"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/Header">
 
-    <TextView
-        android:id="@+id/descriptionTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="description description"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</LinearLayout>
+            <ImageView
+                android:id="@+id/poster_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/detailsPosterHeight"
+                android:src="@drawable/ic_loading_image"/>
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="title"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_below="@+id/poster_imageView"
+                android:textSize="32dp"/>
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:layout_below="@+id/titleTextView"
+                android:text="description description"/>
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

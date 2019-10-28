@@ -47,7 +47,7 @@ public class SearchResultListAdapter extends ArrayAdapter<SearchEntryListItem> {
         year.setText(item.getYear());
         type.setText(item.getType());
 
-        Ion.with(poster).centerCrop().placeholder(R.drawable.loadingimage).error(R.drawable.errorloadingimage).load(item.getPoster());
+        Ion.with(poster).centerInside().placeholder(R.drawable.ic_loading_image).error(R.drawable.ic_error_image).load(item.getPoster());
 
         return v;
     }

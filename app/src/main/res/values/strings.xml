@@ -16,6 +16,8 @@
     <string name="sortedLabelAsc">Asc</string>
     <string name="sortedLabelDesc">Desc</string>
     <string name="lab1ButtonText">L1</string>
+    <string name="lab2ButtonText">L2</string>
+    <string name="sendRequestButton">Send Request</string>
     <string name="searchLabel">Search</string>
     <string name="defenseTaskButtonText">"Remove"</string>
 </resources>

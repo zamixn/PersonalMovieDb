@@ -3,11 +3,16 @@
     <dimen name="sortArrowSize">30dp</dimen>
     <dimen name="sortedLabelWidth">40dp</dimen>
     <dimen name="filterByFirstLetterWidth">160dp</dimen>
+    <dimen name="labWorksButtonWidth">50dp</dimen>
+    <dimen name="defenseTaskButtonWidth">75dp</dimen>
+
     <dimen name="mainLogoWidth">100dp</dimen>
-    <dimen name="labWorksButtonWidth">100dp</dimen>
     <dimen name="mainButtonTextSize">20sp</dimen>
     <dimen name="lookingGlassSize">30dp</dimen>
-    <dimen name="searchEntryPosterWidth">120dp</dimen>
+    <dimen name="searchEntryPosterWidth">110dp</dimen>
     <dimen name="searchEntryPosterHeight">165dp</dimen>
-    <dimen name="defenseTaskButtonWidth">75dp</dimen>
+    <dimen name="downloadProgressBarHeight">6dp</dimen>
+
+    <dimen name="detailsPosterWidth">220dp</dimen>
+    <dimen name="detailsPosterHeight">330dp</dimen>
 </resources>
