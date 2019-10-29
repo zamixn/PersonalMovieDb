@@ -12,17 +12,21 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/Header">
+        android:layout_below="@id/Header"
+        android:scrollbarThumbVertical="@drawable/custom_scroll_style">
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
+
                 android:id="@+id/poster_imageView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/detailsPosterHeight"
-                android:src="@drawable/ic_loading_image"/>
+                android:src="@drawable/ic_loading_image"
+                android:scaleType="fitCenter"/>
 
             <TextView
                 android:id="@+id/titleTextView"
@@ -32,7 +36,6 @@
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:layout_below="@+id/poster_imageView"
                 android:textSize="32dp"/>
 
             <TextView
@@ -41,9 +44,51 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
-                android:layout_below="@+id/titleTextView"
                 android:text="description description"/>
-        </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/videos"
+                android:textSize="20dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"/>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/videoHeight">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/colorPrimary" />
+
+            </androidx.viewpager.widget.ViewPager>
+            
+<!--            <WebView-->
+<!--                android:id="@+id/WebView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/videoHeight"></WebView>-->
+
+<!--            <VideoView-->
+<!--                android:layout_marginTop="50dp"-->
+<!--                android:layout_width="fill_parent"-->
+<!--                android:layout_height="@dimen/videoHeight"-->
+<!--                android:id="@+id/VideoView"></VideoView>-->
+
+
+
+
+<!--            <com.google.android.youtube.player.YouTubePlayerView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:visibility="visible"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:id="@+id/youtube_player"-->
+<!--                android:layout_alignParentTop="true" />-->
+        </LinearLayout>
 
     </ScrollView>
 

@@ -20,4 +20,6 @@
     <string name="sendRequestButton">Send Request</string>
     <string name="searchLabel">Search</string>
     <string name="defenseTaskButtonText">"Remove"</string>
+
+    <string name="videos">Videos</string>
 </resources>

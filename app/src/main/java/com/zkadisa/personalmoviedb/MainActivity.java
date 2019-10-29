@@ -15,6 +15,7 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.zkadisa.personalmoviedb.DataHandling.OMDbReader;
+import com.zkadisa.personalmoviedb.DataHandling.YoutubeReader;
 import com.zkadisa.personalmoviedb.L1.FirstActivity;
 import com.zkadisa.personalmoviedb.L1.ListAdapter;
 
@@ -69,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 //        Header header = (Header) findViewById(R.id.Header);
+
+        YoutubeReader.SearchYoutube("Shrek trailer", context);
     }
 
     public void InvalidateView(final View v)

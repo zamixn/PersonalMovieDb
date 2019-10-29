@@ -14,5 +14,6 @@
     <dimen name="downloadProgressBarHeight">6dp</dimen>
 
     <dimen name="detailsPosterWidth">220dp</dimen>
-    <dimen name="detailsPosterHeight">330dp</dimen>
+    <dimen name="detailsPosterHeight">300dp</dimen>
+    <dimen name="videoHeight">250dp</dimen>
 </resources>
