@@ -57,37 +57,16 @@
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/videoHeight">
+                android:layout_height="@dimen/videoTabHeight">
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/colorPrimary" />
+                    android:background="?attr/colorPrimary"/>
 
             </androidx.viewpager.widget.ViewPager>
-            
-<!--            <WebView-->
-<!--                android:id="@+id/WebView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="@dimen/videoHeight"></WebView>-->
 
-<!--            <VideoView-->
-<!--                android:layout_marginTop="50dp"-->
-<!--                android:layout_width="fill_parent"-->
-<!--                android:layout_height="@dimen/videoHeight"-->
-<!--                android:id="@+id/VideoView"></VideoView>-->
-
-
-
-
-<!--            <com.google.android.youtube.player.YouTubePlayerView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:visibility="visible"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:id="@+id/youtube_player"-->
-<!--                android:layout_alignParentTop="true" />-->
         </LinearLayout>
 
     </ScrollView>

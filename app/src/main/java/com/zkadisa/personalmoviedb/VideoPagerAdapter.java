@@ -1,16 +1,21 @@
 package com.zkadisa.personalmoviedb;
 
 import android.content.Context;
+import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class VideoPagerAdapter extends FragmentPagerAdapter {
 
-    private static final String[] TAB_TITLES = new String[]{"first", "second"};
+    private List<String> mFragmentTitleList = new ArrayList<>();
+    private List<String> mFragmentURLList = new ArrayList<>();
+    private List<Fragment> mFragmentList = new ArrayList<>();
     private final Context mContext;
 
     public VideoPagerAdapter(Context context, FragmentManager fm) {
@@ -20,20 +25,31 @@ public class VideoPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        return VideoPageFragment.newInstance(position + 1);
+        return mFragmentList.get(position);
+    }
+
+    @Override
+    public int getCount() {
+        return mFragmentList.size();
+    }
+
+    public void addFragment(String title, String url) {
+        int position = mFragmentList.size();
+        Fragment fragment = VideoPageFragment.newInstance(position + 1, title, url);
+        mFragmentList.add(position, fragment);
+        mFragmentTitleList.add(position, title);
+        mFragmentURLList.add(position, url);
+    }
+
+    public void removeFragment(int position) {
+        mFragmentList.remove(position);
+        mFragmentTitleList.remove(position);
+        mFragmentURLList.remove(position);
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return TAB_TITLES[position];
-    }
-
-    @Override
-    public int getCount() {
-        // Show 2 total pages.
-        return 2;
+        return mFragmentTitleList.get(position);
     }
 }

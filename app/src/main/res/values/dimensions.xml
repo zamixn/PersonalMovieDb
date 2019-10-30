@@ -15,5 +15,6 @@
 
     <dimen name="detailsPosterWidth">220dp</dimen>
     <dimen name="detailsPosterHeight">300dp</dimen>
-    <dimen name="videoHeight">250dp</dimen>
+    <dimen name="videoHeight">240dp</dimen>
+    <dimen name="videoTabHeight">300dp</dimen>
 </resources>

@@ -6,15 +6,9 @@
     android:layout_height="match_parent"
     tools:context="VideoPageFragment">
 
-<!--    <WebView-->
-<!--        android:id="@+id/WebView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="@dimen/videoHeight"></WebView>-->
-
-    <TextView
+    <WebView
+        android:id="@+id/WebView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/section_label"
-        android:text="text"/>
+        android:layout_height="@dimen/videoHeight"></WebView>
 
 </LinearLayout>

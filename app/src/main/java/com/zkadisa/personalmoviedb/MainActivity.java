@@ -70,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 //        Header header = (Header) findViewById(R.id.Header);
-
-        YoutubeReader.SearchYoutube("Shrek trailer", context);
     }
 
     public void InvalidateView(final View v)

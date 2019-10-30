@@ -29,9 +29,12 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.zkadisa.personalmoviedb.DataHandling.Entry;
 import com.zkadisa.personalmoviedb.DataHandling.OMDbReader;
+import com.zkadisa.personalmoviedb.DataHandling.YoutubeReader;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -87,40 +90,6 @@ public class DetailsActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-
-
-//        youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
-//        onInitializedListener = new YouTubePlayer.OnInitializedListener(){
-//            @Override
-//            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-//
-//                youTubePlayer.loadVideo("Hce74cEAAaE");
-//
-//                youTubePlayer.play();
-//            }
-//
-//            @Override
-//            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-//
-//            }
-//        };
-//        youTubePlayerView.initialize("AIzaSyDEFIp8fvVbIZ3ibX0OZscWv0T-jmfF6hc", onInitializedListener);
-
-//        WebView mWebView = findViewById(R.id.WebView);
-//        mWebView.getSettings().setJavaScriptEnabled(true);
-//        mWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
-//        mWebView.loadUrl("https://www.youtube.com/embed/Yw6u6YkTgQ4");
-//        mWebView.setWebChromeClient(new WebChromeClient());
-
-//        VideoView videoView = findViewById(R.id.VideoView);
-//        MediaController mediaController= new MediaController(this);
-//        mediaController.setAnchorView(videoView);
-//        Uri uri=Uri.parse("http://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4");
-//        videoView.setMediaController(mediaController);
-//        videoView.setVideoURI(uri);
-//        videoView.requestFocus();
-//
-//        videoView.start();
-
+        YoutubeReader.SearchYoutubeForVideosAndNotifyPager(item.getTitle() + " " + item.getYear(), context, sectionsPagerAdapter, 5);
     }
 }
