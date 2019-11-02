@@ -24,6 +24,15 @@
                 android:layout_marginRight="20dp"/>
 
             <Button
+                android:id="@+id/UserListButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:textSize="@dimen/mainButtonTextSize"
+                android:text="@string/userList"></Button>
+
+
+            <Button
                 android:id="@+id/lab1Button"
                 android:layout_width="@dimen/labWorksButtonWidth"
                 android:layout_height="wrap_content"

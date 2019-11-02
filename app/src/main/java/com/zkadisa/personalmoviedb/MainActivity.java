@@ -21,6 +21,7 @@ import com.zkadisa.personalmoviedb.L1.ListAdapter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,10 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
     private Button searchButton;
 
-    private ListView searchList;
+    private ScrollListView searchList;
     private SearchResultListAdapter adapter;
 
     public static CustomIndicator customIndicator;
+
+    private long previousBottomScrollTime = -500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +61,23 @@ public class MainActivity extends AppCompatActivity {
                 context.startActivity(intent);
             }
         });
+        searchList.setOnBottomReachedListener(new ScrollListView.OnBottomReachedListener() {
+            @Override
+            public void onBottomReached() {
+                if(OMDbReader.GetPageNumber() < 100 && (System.currentTimeMillis() - previousBottomScrollTime > 500)) {
+                    OMDbReader.SearchOMDb(searchQueryEditText.getText().toString(), true, adapter);
+                    previousBottomScrollTime = System.currentTimeMillis();
+                }
+            }
+        });
 
         customIndicator = findViewById(R.id.downloadProgressBar);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 adapter.clear();
-                OMDbReader.SearchOMDb(searchQueryEditText.getText().toString(), adapter);
-                hideSoftKeyboard(MainActivity.this, view); // MainActivity is the name of the class and v is the View parameter used in the button listener method onClick.
+                OMDbReader.SearchOMDb(searchQueryEditText.getText().toString(), false, adapter);
+                hideSoftKeyboard(MainActivity.this, view);
             }
         });
 

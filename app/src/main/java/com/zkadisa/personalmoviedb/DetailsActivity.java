@@ -42,10 +42,13 @@ public class DetailsActivity extends AppCompatActivity {
 
     private ImageView poster_imageView;
     private TextView title_textView;
+    private TextView type_textView;
+    private TextView year_textView;
+    private TextView genre_textView;
+    private TextView directors_textView;
+    private TextView writers_textView;
+    private TextView actors_textView;
     private TextView plot_textView;
-//    YouTubePlayerView youTubePlayerView;
-//    Button button;
-//    YouTubePlayer.OnInitializedListener onInitializedListener;
 
     private Gson gson = new Gson();
 
@@ -56,13 +59,25 @@ public class DetailsActivity extends AppCompatActivity {
 
         poster_imageView = findViewById(R.id.poster_imageView);
         title_textView = findViewById(R.id.titleTextView);
+        type_textView = findViewById(R.id.typeTextView);
+        year_textView = findViewById(R.id.yearTextView);
         plot_textView = findViewById(R.id.descriptionTextView);
+        genre_textView = findViewById(R.id.genreTextView);
+        directors_textView = findViewById(R.id.directorsTextView);
+        writers_textView = findViewById(R.id.writersTextView);
+        actors_textView = findViewById(R.id.actorsTextView);
 
         Intent intent = getIntent();
 
         SearchEntryListItem item = (SearchEntryListItem) intent.getSerializableExtra("data");
-
         title_textView.setText(item.getTitle());
+        type_textView.setText(item.getType().toUpperCase());
+        year_textView.setText(item.getYear());
+        plot_textView.setText("");
+        genre_textView.setText("");
+        directors_textView.setText("");
+        writers_textView.setText("");
+        actors_textView.setText("");
 
         Ion.with(poster_imageView)
                 .placeholder(R.drawable.ic_loading_image)
@@ -81,7 +96,11 @@ public class DetailsActivity extends AppCompatActivity {
                         }
 
                         Entry entry = gson.fromJson(result.toString(), Entry.class);
+                        genre_textView.setText(entry.Genre);
                         plot_textView.setText(entry.Plot);
+                        directors_textView.setText(entry.Director);
+                        writers_textView.setText(entry.Writer);
+                        actors_textView.setText(entry.Actors);
                     }
                 });
 

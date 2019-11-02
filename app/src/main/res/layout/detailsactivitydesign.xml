@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -36,15 +37,113 @@
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:textSize="32dp"/>
+                android:textSize="32sp"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/yearTextView"
+                    android:paddingRight="70dp"
+                    android:textSize="18sp"
+                    android:text="year"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/typeTextView"
+                    android:paddingLeft="70dp"
+                    android:textSize="18sp"
+                    android:text="type"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/colorSubText"
+                android:text="@string/genresString"/>
+            <TextView
+                android:id="@+id/genreTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="16sp"
+                android:text="genres"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/colorSubText"
+                android:text="@string/descriptionString"/>
             <TextView
                 android:id="@+id/descriptionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:padding="10dp"
-                android:text="description description"/>
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="description"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/colorSubText"
+                android:text="@string/directorsString"/>
+            <TextView
+                android:id="@+id/directorsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="directorsTextView"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/colorSubText"
+                android:text="@string/writersString"/>
+            <TextView
+                android:id="@+id/writersTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="writersTextView"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/colorSubText"
+                android:text="@string/actorsString"/>
+            <TextView
+                android:id="@+id/actorsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="actorsTextView"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -52,6 +151,8 @@
                 android:text="@string/videos"
                 android:textSize="20dp"
                 android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/colorSubText"
                 android:paddingTop="15dp"/>
 
             <androidx.viewpager.widget.ViewPager
@@ -63,7 +164,8 @@
                     android:id="@+id/tabs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/colorPrimary"/>
+                    android:background="@color/colorBackgroundDarkest"
+                    app:tabTextColor="@color/colorText"/>
 
             </androidx.viewpager.widget.ViewPager>
 

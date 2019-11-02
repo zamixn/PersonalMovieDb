@@ -50,12 +50,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ListView
+    <com.zkadisa.personalmoviedb.ScrollListView
         android:id="@+id/searchEntryListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/SearchBar"
-        android:scrollbarThumbVertical="@drawable/custom_scroll_style"></ListView>
+        android:scrollbarThumbVertical="@drawable/custom_scroll_style"></com.zkadisa.personalmoviedb.ScrollListView>
 
     <com.zkadisa.personalmoviedb.CustomIndicator
         android:id="@+id/downloadProgressBar"

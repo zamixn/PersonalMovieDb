@@ -8,25 +8,33 @@
     </style>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorBackground</item>
+    <style name="AppTheme"
+        parent="Theme.AppCompat.DayNight.NoActionBar">
+<!--        <item name="android:background">@color/colorBackgroundDarkest</item>-->
         <item name="colorPrimaryDark">@color/colorBackgroundDark</item>
         <item name="colorAccent">@color/colorText</item>
         <item name="android:windowBackground">@color/colorBackgroundDark</item>
         <item name="android:textColor">@color/colorText</item>
         <item name="android:textColorHint">@color/colorSubText</item>
+<!--        <item name="actionBarTheme">@style/NewActionBar</item>-->
+<!--        <item name="actionBarStyle">@style/NewActionBar</item>-->
         <item name="buttonStyle">@style/button</item>
         <item name="editTextStyle">@style/editText</item>
     </style>
 
     <style name="button" parent="@android:style/Widget.Button">
         <item name="android:textColor">@color/colorText</item>
+        <item name="colorPrimaryDark">@color/colorBackgroundDark</item>
         <item name="android:background">@drawable/bytton_style</item>
     </style>
 
     <style name="editText" parent="@android:style/Widget.EditText">
         <item name="android:textColor">@color/colorText</item>
     </style>
+
+<!--    <style name="NewActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">-->
+<!--        <item name="android:background">@color/colorBackgroundDarkest</item>-->
+<!--        <item name="android:icon">@drawable/pmdb_logo_txtonly</item>-->
+<!--    </style>-->
 
 </resources>

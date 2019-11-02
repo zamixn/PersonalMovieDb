@@ -18,6 +18,7 @@ import com.zkadisa.personalmoviedb.L1.FirstActivity;
 public class Header extends RelativeLayout {
     private final String TAG = this.getClass().getName();
 
+    private Button listsButton;
     private Button l1Button;
     private ImageButton logoButton;
 
@@ -36,36 +37,30 @@ public class Header extends RelativeLayout {
         initHeader();
     }
 
-
-//    public void initHeader(final Context context) {
-//        inflateHeader(context);
-//    }
     public void initHeader() {
         inflateHeader();
     }
 
-//    private void inflateHeader(final Context context) {
-//        LayoutInflater inflater = (LayoutInflater) getContext()
-//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        inflater.inflate(R.layout.header, this);
-//        l1Button = (Button) findViewById(R.id.lab1Button);
-//
-//        l1Button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, FirstActivity.class);
-//                context.startActivity(intent);
-//            }
-//        });
-//    }
+
     private void inflateHeader() {
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.header, this);
+        listsButton = (Button)findViewById(R.id.UserListButton);
         l1Button = (Button) findViewById(R.id.lab1Button);
         logoButton = (ImageButton)findViewById(R.id.logo);
 
         final Context context = getContext();
+        listsButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utilities.Vibrate(context);
+                Intent intent = new Intent(context, UserListActivity.class);
+                context.startActivity(intent);
+
+            }
+        });
+
         l1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

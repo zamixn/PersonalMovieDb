@@ -17,12 +17,25 @@ public class OMDbReader {
 
     private enum  QueryTpe {Search, Details}
     private static QueryTpe queryTpe;
+    private static int pageNumber;
+    private static boolean allowNextPage;
 
     private static SearchResultListAdapter adapter;
-    public static void SearchOMDb(String query, SearchResultListAdapter adapter){
+    public static void SearchOMDb(String query, boolean appendPage, SearchResultListAdapter adapter){
         OMDbReader.adapter = adapter;
+        if(appendPage) {
+            pageNumber++;
+            if(!allowNextPage) {
+                Log.d("OMDb", "Next Page Not Allowed");
+                return;
+            }
+        }
+        else {
+            pageNumber = 1;
+            allowNextPage = true;
+        }
         queryTpe = QueryTpe.Search;
-        String url = String.format("%s&s=%s", baseURL, query);
+        String url = String.format("%s&s=%s&page=%s", baseURL, query, pageNumber);
         Log.d("OMDb", url);
         WebPageDownloader downloader = new WebPageDownloader();
         downloader.execute(url);
@@ -49,8 +62,10 @@ public class OMDbReader {
     private static void ReceivedSearchResults(String result){
         try {
             SearchResult r = gson.fromJson(result, SearchResult.class);
-            if(!r.Response)
+            if(!r.Response) {
+                allowNextPage = false;
                 throw new Exception("Response: False");
+            }
 
             for (int i = 0; i < r.totalResults; i++){
 
@@ -71,5 +86,10 @@ public class OMDbReader {
         }catch (Exception e){
             Log.d("OMDb", "Failed to deserialize");
         }
+    }
+
+    public static int GetPageNumber()
+    {
+        return pageNumber;
     }
 }

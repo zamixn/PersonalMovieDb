@@ -22,4 +22,10 @@
     <string name="defenseTaskButtonText">"Remove"</string>
 
     <string name="videos">Videos</string>
+    <string name="userList">Lists</string>
+    <string name="genresString">Genres:</string>
+    <string name="directorsString">Directed by:</string>
+    <string name="writersString">Written by:</string>
+    <string name="actorsString">Main cast:</string>
+    <string name="descriptionString">Description:</string>
 </resources>
