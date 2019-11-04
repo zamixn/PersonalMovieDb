@@ -1,22 +1,13 @@
 package com.zkadisa.personalmoviedb.DataHandling;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
-import android.view.View;
 
-import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
-import com.zkadisa.personalmoviedb.VideoPagerAdapter;
-
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
+import com.zkadisa.personalmoviedb.Misc.VideoPagerAdapter;
 
 public class YoutubeReader {
 

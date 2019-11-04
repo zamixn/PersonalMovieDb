@@ -26,6 +26,8 @@
         <activity android:name=".L1.FourthActivity"></activity>
         <activity android:name=".L1.DetailsActivity"></activity>
         <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".UserList.UserListActivity"></activity>
+        <activity android:name=".UserList.NewUserListActivity"></activity>
     </application>
 
 </manifest>

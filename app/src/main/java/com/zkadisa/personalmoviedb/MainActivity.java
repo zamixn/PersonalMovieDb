@@ -4,26 +4,22 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.ActionBar;
 
 import com.zkadisa.personalmoviedb.DataHandling.OMDbReader;
-import com.zkadisa.personalmoviedb.DataHandling.YoutubeReader;
-import com.zkadisa.personalmoviedb.L1.FirstActivity;
-import com.zkadisa.personalmoviedb.L1.ListAdapter;
+import com.zkadisa.personalmoviedb.Misc.CustomIndicator;
+import com.zkadisa.personalmoviedb.Misc.ScrollListView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Timer;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivityClass {
 
     private Context context = this;
     private static MainActivity instance;

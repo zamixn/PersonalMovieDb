@@ -1,4 +1,4 @@
-package com.zkadisa.personalmoviedb;
+package com.zkadisa.personalmoviedb.Misc;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;

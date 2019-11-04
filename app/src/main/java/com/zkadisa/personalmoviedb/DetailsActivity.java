@@ -2,27 +2,14 @@ package com.zkadisa.personalmoviedb;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -30,13 +17,9 @@ import com.koushikdutta.ion.Ion;
 import com.zkadisa.personalmoviedb.DataHandling.Entry;
 import com.zkadisa.personalmoviedb.DataHandling.OMDbReader;
 import com.zkadisa.personalmoviedb.DataHandling.YoutubeReader;
+import com.zkadisa.personalmoviedb.Misc.VideoPagerAdapter;
 
-import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends BaseActivityClass {
 
     private Context context = this;
 

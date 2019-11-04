@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item android:id="@+id/homeAction"
+        android:title="Home"
+        android:icon="@drawable/pmdb_logo_txtonly"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/listAction"
+        android:icon="@mipmap/ic_list"
+        android:title="User List"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/lab1Action"
+        android:title="Lab 1"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/lab2Action"
+    android:title="Lab 2"
+    app:showAsAction="never"/>
+
+    <item android:id="@+id/lab3Action"
+        android:title="Lab 3"
+        app:showAsAction="never"/>
+</menu>

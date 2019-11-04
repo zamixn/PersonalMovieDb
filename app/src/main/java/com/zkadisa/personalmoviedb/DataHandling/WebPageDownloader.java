@@ -3,14 +3,12 @@ package com.zkadisa.personalmoviedb.DataHandling;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.zkadisa.personalmoviedb.CustomIndicator;
+import com.zkadisa.personalmoviedb.Misc.CustomIndicator;
 import com.zkadisa.personalmoviedb.MainActivity;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class WebPageDownloader extends AsyncTask<String, Void, String> {

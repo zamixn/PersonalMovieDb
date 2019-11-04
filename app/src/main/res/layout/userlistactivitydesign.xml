@@ -3,38 +3,15 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <com.zkadisa.personalmoviedb.Header
-        android:id="@+id/Header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-<!--    <HorizontalScrollView-->
-<!--        android:id="@+id/Header2"-->
+<!--    <com.zkadisa.personalmoviedb.Misc.Header-->
+<!--        android:id="@+id/Header"-->
 <!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/Header">-->
-<!--        -->
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:background="@color/colorBackgroundDarker">-->
-<!--            -->
-<!--            <Button-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                test-->
-<!--            -->
-<!--        </LinearLayout>-->
-<!--        -->
-<!--    </HorizontalScrollView>-->
+<!--        android:layout_height="wrap_content"/>-->
 
     <ListView
-        android:id="@+id/UserListView"
+        android:id="@+id/userListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/Header"></ListView>
+        android:layout_height="match_parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
@@ -43,8 +20,8 @@
         android:layout_margin="25dp"
         android:layout_marginBottom="10dp"
         android:src="@mipmap/ic_add"
-        android:layout_alignParentBottom="true">
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        android:layout_alignParentBottom="true"
+        android:id="@+id/addNewUserList"/>
 
 <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
 <!--        android:id="@+id/ButtonRemoveList"-->

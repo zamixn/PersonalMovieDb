@@ -1,19 +1,18 @@
-package com.zkadisa.personalmoviedb;
+package com.zkadisa.personalmoviedb.Misc;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Vibrator;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.zkadisa.personalmoviedb.L1.FirstActivity;
+import com.zkadisa.personalmoviedb.MainActivity;
+import com.zkadisa.personalmoviedb.R;
+import com.zkadisa.personalmoviedb.UserList.UserListActivity;
 
 public class Header extends RelativeLayout {
     private final String TAG = this.getClass().getName();

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/userListViewTitleTextSize"
+        android:text="@string/newUserListString"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/userListTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:hint="@string/newUserList_titleHint"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:singleLine="true"/>
+
+    <Button
+        android:id="@+id/saveUserListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="@string/newUserList_saveButton"
+        android:layout_below="@id/userListTitle"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"/>
+
+
+</RelativeLayout>

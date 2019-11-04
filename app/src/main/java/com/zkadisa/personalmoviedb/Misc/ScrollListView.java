@@ -1,4 +1,4 @@
-package com.zkadisa.personalmoviedb;
+package com.zkadisa.personalmoviedb.Misc;
 
 
 import android.content.Context;

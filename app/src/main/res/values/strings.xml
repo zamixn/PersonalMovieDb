@@ -28,4 +28,8 @@
     <string name="writersString">Written by:</string>
     <string name="actorsString">Main cast:</string>
     <string name="descriptionString">Description:</string>
+
+    <string name="newUserListString">Create new list</string>
+    <string name="newUserList_titleHint">Title</string>
+    <string name="newUserList_saveButton">Save</string>
 </resources>
