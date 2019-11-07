@@ -32,4 +32,6 @@
     <string name="newUserListString">Create new list</string>
     <string name="newUserList_titleHint">Title</string>
     <string name="newUserList_saveButton">Save</string>
+
+    <string name="userlistoptions_remove">Remove</string>
 </resources>

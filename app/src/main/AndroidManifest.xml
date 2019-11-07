@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
     <application
         android:allowBackup="true"
@@ -26,8 +29,10 @@
         <activity android:name=".L1.FourthActivity"></activity>
         <activity android:name=".L1.DetailsActivity"></activity>
         <activity android:name=".DetailsActivity"></activity>
-        <activity android:name=".UserList.UserListActivity"></activity>
+        <activity android:name=".UserList.UserListActivity" android:launchMode="singleTask"></activity>
         <activity android:name=".UserList.NewUserListActivity"></activity>
+        <activity android:name=".UserList.UserListEditActivity"></activity>
+        <activity android:name=".SearchForEntriesActivity"></activity>
     </application>
 
 </manifest>

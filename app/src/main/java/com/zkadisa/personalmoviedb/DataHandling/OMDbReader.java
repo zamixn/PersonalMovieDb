@@ -3,8 +3,6 @@ package com.zkadisa.personalmoviedb.DataHandling;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.koushikdutta.ion.Ion;
-import com.zkadisa.personalmoviedb.R;
 import com.zkadisa.personalmoviedb.SearchEntryListItem;
 import com.zkadisa.personalmoviedb.SearchResultListAdapter;
 

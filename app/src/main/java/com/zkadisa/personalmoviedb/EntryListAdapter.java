@@ -9,13 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.koushikdutta.ion.Ion;
+import com.zkadisa.personalmoviedb.DataHandling.Entry;
 
 import java.util.List;
 
-public class SearchResultListAdapter extends ArrayAdapter<SearchEntryListItem> {
+public class EntryListAdapter extends ArrayAdapter<EntryListItem> {
 
-    public SearchResultListAdapter(Context context, List<SearchEntryListItem> objects){
-        super(context, R.layout.searchentrylistitemdesign, objects);
+    public EntryListAdapter(Context context, List<EntryListItem> objects){
+        super(context, R.layout.entrylistitemdesign, objects);
     }
 
     @Override
@@ -25,7 +26,7 @@ public class SearchResultListAdapter extends ArrayAdapter<SearchEntryListItem> {
 
         if(v == null){
             LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.searchentrylistitemdesign, null);
+            v = inflater.inflate(R.layout.entrylistitemdesign, null);
         }
 
         ImageView poster = v.findViewById(R.id.posterImage);
@@ -33,7 +34,7 @@ public class SearchResultListAdapter extends ArrayAdapter<SearchEntryListItem> {
         TextView year = v.findViewById(R.id.yearTextView);
         TextView type = v.findViewById(R.id.typeTextView);
 
-        SearchEntryListItem item = getItem(position);
+        EntryListItem item = getItem(position);
         title.setText(item.getTitle());
         year.setText(item.getYear());
         type.setText(item.getType());
@@ -41,5 +42,12 @@ public class SearchResultListAdapter extends ArrayAdapter<SearchEntryListItem> {
         Ion.with(poster).centerInside().placeholder(R.drawable.ic_loading_image).error(R.drawable.ic_error_image).load(item.getPoster());
 
         return v;
+    }
+
+    public boolean contains(EntryListItem e){
+        for (int i = 0; i < getCount(); i++)
+            if(getItem(i).getImdbID().compareTo(e.getImdbRating()) == 0)
+                return true;
+        return  false;
     }
 }

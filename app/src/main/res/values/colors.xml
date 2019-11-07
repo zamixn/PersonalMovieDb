@@ -3,7 +3,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    colorBackgroundDarkest
+
     <color name="colorBackground">#241C1C</color>
     <color name="colorBackgroundDark">#1F1A1A</color>
     <color name="colorBackgroundDarker">#161212</color>
@@ -11,8 +11,6 @@
     <color name="colorBackgroundBlack">#000000</color>
     <color name="colorText">#FFD6CF</color>
     <color name="colorSubText">#85FFD6CF</color>
-    <!--<color name="colorText">#ff5837</color>-->
-
 
     <color name="colorButtonTop">#5C1B05</color>
     <color name="colorButtonBottom">#1B1111</color>

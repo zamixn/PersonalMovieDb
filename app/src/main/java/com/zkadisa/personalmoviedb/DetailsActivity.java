@@ -51,8 +51,9 @@ public class DetailsActivity extends BaseActivityClass {
         actors_textView = findViewById(R.id.actorsTextView);
 
         Intent intent = getIntent();
-
+        int type = intent.getIntExtra("data", 0);
         SearchEntryListItem item = (SearchEntryListItem) intent.getSerializableExtra("data");
+
         title_textView.setText(item.getTitle());
         type_textView.setText(item.getType().toUpperCase());
         year_textView.setText(item.getYear());

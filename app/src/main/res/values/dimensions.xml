@@ -19,4 +19,9 @@
     <dimen name="videoTabHeight">300dp</dimen>
 
     <dimen name="userListViewTitleTextSize">28sp</dimen>
+    <dimen name="userListViewPosterWidth">60dp</dimen>
+    <dimen name="userListViewPosterHeight">80dp</dimen>
+
+    <dimen name="headerTextSize">32sp</dimen>
+    <dimen name="subheaderTextSize">18sp</dimen>
 </resources>

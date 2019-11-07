@@ -164,6 +164,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorBackgroundDarkest"
+                    app:tabBackground="@color/colorBackgroundDarkest"
+                    app:tabIconTintMode="multiply"
+                    app:tabIconTint="@color/colorSubText"
                     app:tabTextColor="@color/colorText"/>
 
             </androidx.viewpager.widget.ViewPager>

@@ -19,29 +19,22 @@ import com.zkadisa.personalmoviedb.Misc.ScrollListView;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MainActivity extends BaseActivityClass {
+public class SearchForEntriesActivity extends BaseActivityClass {
 
     private Context context = this;
-    private static MainActivity instance;
 
     private EditText searchQueryEditText;
-
     private Button searchButton;
 
     private ScrollListView searchList;
     private SearchResultListAdapter adapter;
 
-    public static CustomIndicator customIndicator;
-
     private long previousBottomScrollTime = -500;
-
-    private static AppDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mainactivitydesign);
-        instance = this;
+        setContentView(R.layout.searchforentriesactivitydesign);
 
         searchQueryEditText = findViewById(R.id.searchPhraseEditText);
         searchButton = findViewById(R.id.search_button);
@@ -54,9 +47,10 @@ public class MainActivity extends BaseActivityClass {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 SearchEntryListItem item = (SearchEntryListItem) searchList.getItemAtPosition(i);
-                Intent intent = new Intent(context, DetailsActivity.class);
-                intent.putExtra("data", (Serializable) item);
-                context.startActivity(intent);
+                Intent intent = new Intent();
+                intent.putExtra("data", item);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
         searchList.setOnBottomReachedListener(new ScrollListView.OnBottomReachedListener() {
@@ -68,46 +62,13 @@ public class MainActivity extends BaseActivityClass {
                 }
             }
         });
-
-        customIndicator = findViewById(R.id.downloadProgressBar);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 adapter.clear();
                 OMDbReader.SearchOMDb(searchQueryEditText.getText().toString(), false, adapter);
-                hideSoftKeyboard(MainActivity.this, view);
+                MainActivity.hideSoftKeyboard(SearchForEntriesActivity.this, view);
             }
         });
-
-//        Header header = (Header) findViewById(R.id.Header);
-
-        database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "my_database")
-                .allowMainThreadQueries().build();
-
-//        context.deleteDatabase("my_database");
-    }
-
-    public static AppDatabase getDatabase(){
-        return database;
-    }
-
-    public void InvalidateView(final View v)
-    {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                v.invalidate();
-            }
-        });
-    }
-    public static void Invalidate(final View v)
-    {
-        instance.InvalidateView(v);
-    }
-
-    public static void hideSoftKeyboard (Activity activity, View view)
-    {
-        InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
     }
 }

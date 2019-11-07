@@ -12,6 +12,9 @@ import com.zkadisa.personalmoviedb.BaseActivityClass;
 import com.zkadisa.personalmoviedb.Misc.Utilities;
 import com.zkadisa.personalmoviedb.R;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class NewUserListActivity extends BaseActivityClass {
 
     private Context context = this;
@@ -32,7 +35,8 @@ public class NewUserListActivity extends BaseActivityClass {
             public void onClick(View view) {
                 Log.i("tag", listTitleView.getText().toString());
                 if(!listTitleView.getText().toString().isEmpty()){
-                    UserList newList = new UserList(listTitleView.getText().toString());
+                    Date currDate = Calendar.getInstance().getTime();
+                    UserList newList = new UserList(listTitleView.getText().toString(), currDate);
 
                     Intent intent = new Intent();
                     intent.putExtra("data", newList);

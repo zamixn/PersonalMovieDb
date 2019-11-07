@@ -1,5 +1,7 @@
 package com.zkadisa.personalmoviedb.DataHandling;
 
+import java.io.Serializable;
+
 public class Entry {
 
     public String Title;
