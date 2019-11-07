@@ -23,7 +23,10 @@ public interface UserListDao {
     @Delete
     void delete(UserList list);
 
-    @Query("SELECT * from UserList ORDER BY title ASC")
+    @Query("SELECT * FROM UserList WHERE title = :id ")
+    UserList get(String id);
+
+    @Query("SELECT * from UserList")
     List<UserList> getAllUserLists();
 
 

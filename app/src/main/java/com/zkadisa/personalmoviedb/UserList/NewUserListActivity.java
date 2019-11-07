@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.zkadisa.personalmoviedb.BaseActivityClass;
+import com.zkadisa.personalmoviedb.MainActivity;
 import com.zkadisa.personalmoviedb.Misc.Utilities;
 import com.zkadisa.personalmoviedb.R;
 
@@ -36,8 +37,13 @@ public class NewUserListActivity extends BaseActivityClass {
                 Log.i("tag", listTitleView.getText().toString());
                 if(!listTitleView.getText().toString().isEmpty()){
                     Date currDate = Calendar.getInstance().getTime();
-                    UserList newList = new UserList(listTitleView.getText().toString(), currDate);
+                    String title = listTitleView.getText().toString();
+                    if(MainActivity.getDatabase().userListDao().get(title) != null){
+                        Utilities.ShowCustomToast(context, "List with the same title already exists");
+                        return;
+                    }
 
+                    UserList newList = new UserList(title, currDate);
                     Intent intent = new Intent();
                     intent.putExtra("data", newList);
                     setResult(RESULT_OK, intent);
