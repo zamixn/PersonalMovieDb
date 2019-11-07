@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -102,20 +103,6 @@ public class MainActivity extends BaseActivityClass {
 
     public static AppDatabase getDatabase(){
         return database;
-    }
-
-    public void InvalidateView(final View v)
-    {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                v.invalidate();
-            }
-        });
-    }
-    public static void Invalidate(final View v)
-    {
-        instance.InvalidateView(v);
     }
 
     public static void hideSoftKeyboard (Activity activity, View view)

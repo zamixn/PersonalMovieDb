@@ -23,16 +23,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".L1.FirstActivity"></activity>
-        <activity android:name=".L1.SecondActivity"></activity>
-        <activity android:name=".L1.ThirdActivity"></activity>
-        <activity android:name=".L1.FourthActivity"></activity>
-        <activity android:name=".L1.DetailsActivity"></activity>
-        <activity android:name=".DetailsActivity"></activity>
-        <activity android:name=".UserList.UserListActivity" android:launchMode="singleTask"></activity>
-        <activity android:name=".UserList.NewUserListActivity"></activity>
-        <activity android:name=".UserList.UserListEditActivity"></activity>
-        <activity android:name=".SearchForEntriesActivity"></activity>
+        <activity android:name=".L1.FirstActivity"/>
+        <activity android:name=".L1.SecondActivity"/>
+        <activity android:name=".L1.ThirdActivity"/>
+        <activity android:name=".L1.FourthActivity"/>
+        <activity android:name=".L1.DetailsActivity"/>
+        <activity android:name=".L2.MainActivity"/>
+        <activity android:name=".DetailsActivity"/>
+        <activity android:name=".UserList.UserListActivity" android:launchMode="singleTask"/>
+        <activity android:name=".UserList.NewUserListActivity"/>
+        <activity android:name=".UserList.UserListEditActivity"/>
+        <activity android:name=".SearchForEntriesActivity"/>
     </application>
 
 </manifest>

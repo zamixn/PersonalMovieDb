@@ -12,6 +12,7 @@
     <dimen name="searchEntryPosterWidth">110dp</dimen>
     <dimen name="searchEntryPosterHeight">165dp</dimen>
     <dimen name="downloadProgressBarHeight">6dp</dimen>
+    <dimen name="downloadProgressBarHeight_Bar">40dp</dimen>
 
     <dimen name="detailsPosterWidth">220dp</dimen>
     <dimen name="detailsPosterHeight">300dp</dimen>

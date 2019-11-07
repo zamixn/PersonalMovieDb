@@ -59,7 +59,11 @@ public class BaseActivityClass extends AppCompatActivity {
                 context.startActivity(intent);
                 return true;
             }
-            case R.id.lab2Action:
+            case R.id.lab2Action:{
+                Intent intent = new Intent(context, com.zkadisa.personalmoviedb.L2.MainActivity.class);
+                context.startActivity(intent);
+                return true;
+            }
             case R.id.lab3Action:
                 Utilities.ShowCustomToast(context, "Nothing to show :)");
                 return  true;

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/requestButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="send request for json"
+        android:layout_alignParentTop="true"/>
+    <Button
+        android:id="@+id/requestButton2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="send request for json (bar)"
+        android:layout_below="@id/requestButton"/>
+
+    <com.zkadisa.personalmoviedb.L2.BarIndicator
+        android:id="@+id/barIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/downloadProgressBarHeight_Bar"
+        android:background="@color/Transparent"
+        android:layout_above="@+id/cutomIndicator1"/>
+
+    <com.zkadisa.personalmoviedb.Misc.CustomIndicator
+        android:id="@+id/cutomIndicator1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/downloadProgressBarHeight"
+        android:background="@color/Transparent"
+        android:layout_alignParentBottom="true"/>
+
+    <com.zkadisa.personalmoviedb.L2.JsonIndicator
+        android:id="@+id/jsonIndicator"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_above="@id/barIndicator"
+        android:background="@android:color/transparent"/>
+
+</RelativeLayout>

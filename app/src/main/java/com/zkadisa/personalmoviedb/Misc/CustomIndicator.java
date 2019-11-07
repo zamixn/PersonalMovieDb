@@ -7,6 +7,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import androidx.vectordrawable.graphics.drawable.ArgbEvaluator;
+
 import com.zkadisa.personalmoviedb.MainActivity;
 import com.zkadisa.personalmoviedb.R;
 
@@ -31,6 +33,9 @@ public class CustomIndicator extends View {
     public static final int SUCCESS = 2;
     public static final int FAILED = 3;
 
+    private ArgbEvaluator argb = new ArgbEvaluator();
+    private Paint paint = new Paint();
+
     private int state;
     public int getState() {
         return state;
@@ -38,7 +43,7 @@ public class CustomIndicator extends View {
     public void setState(final int state, float value) {
         this.state = state;
         setValue(value);
-        if(state != EXECUTING)
+        if(state != EXECUTING && state != NOTEXECUTED)
         {
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -54,34 +59,34 @@ public class CustomIndicator extends View {
         return value;
     }
     public void setValue(float value) {
-        this.value = value;
-        MainActivity.Invalidate(this);
+        this.value = value > 1 ? 1 : (value < 0 ? 0 : value);
+        this.postInvalidate();
+    }
+
+    private int getColor(float value){
+        return (int) argb.evaluate(value, getResources().getColor(R.color.LightOrange), getResources().getColor(R.color.Orange));
     }
 
     @Override
     protected void onDraw(Canvas canvas){
+
 //        Log.i("value", value + "");
         super.onDraw(canvas);
         int width = getWidth();
         int height = getHeight();
-        Paint paint = new Paint();
         paint.setStrokeWidth(getResources().getDimension(R.dimen.downloadProgressBarHeight));
+        paint.setColor(state == FAILED ? getResources().getColor(R.color.Red) : getColor(value));
+
         switch (state){
             case NOTEXECUTED:
                 break;
             case EXECUTING:
-                paint.setColor(getResources().getColor(R.color.LightOrange));
-                canvas.drawLine(0, height / 2, height * value, height / 2, paint);
+                canvas.drawLine(0, height / 2f, width * value, height / 2f, paint);
                 break;
 
             case SUCCESS:
-                paint.setColor(getResources().getColor(R.color.Orange));
-                canvas.drawLine(0, height / 2, width, height / 2, paint);
-                break;
-
             case FAILED:
-                paint.setColor(getResources().getColor(R.color.Red));
-                canvas.drawLine(0, height / 2, width, height / 2, paint);
+                canvas.drawLine(0, height / 2f, width, height / 2f, paint);
                 break;
 
             default:

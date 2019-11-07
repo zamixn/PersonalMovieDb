@@ -19,6 +19,8 @@
     <color name="Red">#FF0A01</color>
     <color name="LightOrange">#FFA993</color>
     <color name="Transparent">#00FFA993</color>
+    <color name="colorGreen">#72C900</color>
+    <color name="colorGreenDark">#1A2E00</color>
 
 
 </resources>
