@@ -75,7 +75,13 @@ public class UserListActivity extends BaseActivityClass {
         registerForContextMenu(userListView);
 
         database = MainActivity.getDatabase();
+    }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        adapter.clear();
         lists = database.userListDao().getAllUserLists();
         Collections.sort(lists,
                 new Comparator<UserList>() {
@@ -87,6 +93,12 @@ public class UserListActivity extends BaseActivityClass {
         for(UserList l : lists)
             adapter.add(l);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onStop() {
+        MainActivity.SaveDatabase();
+        super.onStop();
     }
 
     @Override
@@ -104,14 +116,17 @@ public class UserListActivity extends BaseActivityClass {
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
         long itemID = info.position;
+        Log.i("uindex: ", (int)itemID + " " + lists.size());
+        UserList list = lists.get((int)itemID);
         switch (item.getItemId()){
             case R.id.userlist_remove:
-                Log.i("uindex: ", (int)itemID + " " + lists.size());
-                UserList list = lists.get((int)itemID);
                 lists.remove((int)itemID);
                 database.userListDao().delete(list);
-                adapter.remove(list);
+                adapter = new UserListAdapter(context, lists);
                 adapter.notifyDataSetChanged();
+                userListView.setAdapter(adapter);
+//                adapter.remove(list);
+//                adapter.notifyDataSetChanged();
                 break;
         }
 
@@ -131,6 +146,7 @@ public class UserListActivity extends BaseActivityClass {
             }
         }else if (requestCode == 2) {
             if(resultCode == RESULT_OK) {
+                Log.i("on result", "result");
                 int index = data.getIntExtra("index", -1);
                 boolean wasModified = data.getBooleanExtra("modified", false);
                 if(wasModified) {

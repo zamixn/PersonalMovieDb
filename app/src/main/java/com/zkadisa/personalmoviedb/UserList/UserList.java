@@ -15,8 +15,10 @@ import java.util.List;
 @Entity
 public class UserList implements Serializable {
 
+    @PrimaryKey(autoGenerate = true)
+    public int id;
+
     @NonNull
-    @PrimaryKey
     public String title;
 
     @ColumnInfo(name = "movie_ids")

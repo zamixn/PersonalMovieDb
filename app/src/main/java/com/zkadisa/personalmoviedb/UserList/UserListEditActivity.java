@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,7 +26,6 @@ import com.zkadisa.personalmoviedb.AppDatabase;
 import com.zkadisa.personalmoviedb.BaseActivityClass;
 import com.zkadisa.personalmoviedb.DataHandling.Entry;
 import com.zkadisa.personalmoviedb.DataHandling.OMDbReader;
-import com.zkadisa.personalmoviedb.DataHandling.SearchEntry;
 import com.zkadisa.personalmoviedb.DetailsActivity;
 import com.zkadisa.personalmoviedb.EntryListAdapter;
 import com.zkadisa.personalmoviedb.EntryListItem;
@@ -33,7 +35,6 @@ import com.zkadisa.personalmoviedb.R;
 import com.zkadisa.personalmoviedb.SearchEntryListItem;
 import com.zkadisa.personalmoviedb.SearchForEntriesActivity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class UserListEditActivity extends BaseActivityClass {
     private Context context = this;
     private Gson gson = new Gson();
 
-    private TextView titleTextView;
+    private EditText titleTextView;
     private FloatingActionButton addButton;
     private ListView userListView;
     private List<EntryListItem> items;
@@ -60,6 +61,41 @@ public class UserListEditActivity extends BaseActivityClass {
         setContentView(R.layout.userlisteditactivitydesign);
 
         titleTextView = findViewById(R.id.listTitleView);
+        titleTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                Log.i("Toogle", b + "");
+                if(b)
+                    titleTextView.setText(mList.getTitle());
+                else
+                    titleTextView.setText(mList.getDisplayTitle());
+            }
+        });
+        titleTextView.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                                actionId == EditorInfo.IME_ACTION_DONE ||
+                                event != null &&
+                                        event.getAction() == KeyEvent.ACTION_DOWN &&
+                                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                            if (event == null || !event.isShiftPressed()) {
+                                // the user is done typing.
+
+                                if(!titleTextView.getText().toString().equals(mList.getTitle())){
+                                    mList.setTitle(titleTextView.getText().toString());
+                                    wasModified = true;
+                                    database.userListDao().update(mList);
+                                }
+                                titleTextView.setText(mList.getDisplayTitle());
+                                MainActivity.hideSoftKeyboard(UserListEditActivity.this, v);
+                                return true; // consume.
+                            }
+                        }
+                        return false; // pass on to other listeners.
+                    }
+                }
+        );
         addButton = findViewById(R.id.addNewUserList);
         userListView = findViewById(R.id.userListView);
 

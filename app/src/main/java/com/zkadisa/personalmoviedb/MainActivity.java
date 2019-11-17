@@ -137,22 +137,20 @@ public class MainActivity extends BaseActivityClass {
 
         database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, getResources().getString(R.string.databaseName))
                 .allowMainThreadQueries().build();
-        //        context.deleteDatabase(getResources().getString(R.string.databaseName));
+//                context.deleteDatabase(getResources().getString(R.string.databaseName));
 
         if(!DriveServiceHelper.isInitialized()){
             Intent intent = new Intent(context, AccountActivity.class);
             intent.putExtra("connectionType", AccountActivity.CONNECTION_TYPE_AUTOLOGIN);
             startActivityForResult (intent, 0);
         }
-
-        LoadDatabase();
     }
 
-    @Override
-    protected void onStop() {
-        SaveDatabase();
-        super.onStop();
-    }
+//    @Override
+//    protected void onStop() {
+//        SaveDatabase();
+//        super.onStop();
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -167,6 +165,7 @@ public class MainActivity extends BaseActivityClass {
 
     public static void SaveDatabase(){
         if(!DriveServiceHelper.isInitialized()){
+            Log.e("Drive", "Saving failed. DriveServiceHelper not initialized");
 //            Utilities.ShowCustomToast(instance.context, "Not signed in");
             return;
         }
@@ -247,10 +246,11 @@ public class MainActivity extends BaseActivityClass {
     }
     public static void LoadDatabase() {
         if(!DriveServiceHelper.isInitialized()){
-//            Utilities.ShowCustomToast(instance.context, "Not signed in");
+            Log.e("Drive", "Failed to load database file. DriveServiceHelper not initialized");
+            Utilities.ShowCustomToast(instance.context, "Not signed in");
             return;
         }
-//        Utilities.ShowCustomToast(instance.context, "Loading");
+        Utilities.ShowCustomToast(instance.context, "Loading");
 
         String databaseFileName = instance.getResources().getString(R.string.databaseName);
         DriveServiceHelper.instance.GetFileByName(databaseFileName).addOnSuccessListener(new OnSuccessListener<File>() {
@@ -301,31 +301,31 @@ public class MainActivity extends BaseActivityClass {
 //                                Log.i("Query", queryString + "\n " + query.getSql());
                                 getDatabase().userListDao().deleteAll();
                                 getDatabase().userListDao().insertDataRawFormat(query);
-//                                Utilities.ShowCustomToast(instance.context, "Loading complete");
+                                Utilities.ShowCustomToast(instance.context, "Loading complete");
                             }
                             catch (Exception e){
                                 Log.e("Drive", "Failed to load database file. Exception: " + e);
-//                                Utilities.ShowCustomToast(instance.context, "Loading failed");
+                                Utilities.ShowCustomToast(instance.context, "Loading failed");
                             }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Log.e("Drive", "Failed to load database file. File was null");
-//                            Utilities.ShowCustomToast(instance.context, "Loading failed");
+                            Utilities.ShowCustomToast(instance.context, "Loading failed");
                         }
                     });
 
                 } else{
                     Log.e("Drive", "Failed to load database file. File was null");
-//                    Utilities.ShowCustomToast(instance.context, "Loading failed");
+                    Utilities.ShowCustomToast(instance.context, "Loading failed");
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.e("Drive", "Failed to load database file. Exception: " + e);
-//                Utilities.ShowCustomToast(instance.context, "Loading failed");
+                Utilities.ShowCustomToast(instance.context, "Loading failed");
             }
         });
     }

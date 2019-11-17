@@ -117,6 +117,7 @@ public class AccountActivity extends BaseActivityClass {
             SignInToGoogleServices();
         else if(connectionType == CONNECTION_TYPE_AUTOLOGIN) {
             InitiateHelpers(account);
+            MainActivity.LoadDatabase();
             finish();
         }else
             UpdateAccountInformation(account);
@@ -142,6 +143,7 @@ public class AccountActivity extends BaseActivityClass {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Utilities.ShowCustomToast(context, "Google Sign Out done.");
+                        UninitiateHelpers();
                         revokeAccess();
 
                     }
@@ -185,6 +187,12 @@ public class AccountActivity extends BaseActivityClass {
             GoogleAccountHandler.initialize(account, mGoogleSignInClient);
         if(!DriveServiceHelper.isInitialized())
             DriveServiceHelper.initialize(context, account);
+    }
+    private void UninitiateHelpers(){
+        if(GoogleAccountHandler.isInitialized())
+            GoogleAccountHandler.uninitialize();
+        if(DriveServiceHelper.isInitialized())
+            DriveServiceHelper.uninitialize();
     }
 
     private void HandleSignInResult(Task<GoogleSignInAccount> completedTask) {

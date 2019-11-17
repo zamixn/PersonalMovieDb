@@ -25,4 +25,7 @@ public class GoogleAccountHandler {
     public static void initialize(GoogleSignInAccount account, GoogleSignInClient mGoogleSignInClient){
         instance = new GoogleAccountHandler(account, mGoogleSignInClient);
     }
+    public static void uninitialize(){
+        instance = null;
+    }
 }

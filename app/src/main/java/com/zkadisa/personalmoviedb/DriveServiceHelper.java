@@ -60,6 +60,9 @@ public class DriveServiceHelper {
                         .build();
         instance = new DriveServiceHelper(googleDriveService);
     }
+    public static void uninitialize(){
+        instance = null;
+    }
 
 
     public DriveServiceHelper(Drive driveService) {

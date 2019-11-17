@@ -2,12 +2,18 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b2131ad53070ff03bb7414807dba8484",
+    "identityHash": "5103781c93ea469deca020efa6e1f227",
     "entities": [
       {
         "tableName": "UserList",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`title` TEXT NOT NULL, `movie_ids` TEXT, `date` INTEGER, PRIMARY KEY(`title`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `movie_ids` TEXT, `date` INTEGER)",
         "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
           {
             "fieldPath": "title",
             "columnName": "title",
@@ -29,9 +35,9 @@
         ],
         "primaryKey": {
           "columnNames": [
-            "title"
+            "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
@@ -40,7 +46,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b2131ad53070ff03bb7414807dba8484')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5103781c93ea469deca020efa6e1f227')"
     ]
   }
 }
