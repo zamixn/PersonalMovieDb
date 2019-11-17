@@ -3,8 +3,12 @@ package com.zkadisa.personalmoviedb.DataHandling;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.zkadisa.personalmoviedb.Misc.CustomIndicator;
 import com.zkadisa.personalmoviedb.MainActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -43,7 +47,12 @@ public class WebPageDownloader extends AsyncTask<String, Void, String> {
             if(type == MAIN)
                 OMDbReader.ReceivedWebPageDownload(webPage);
             else if(type == L2) {
-                com.zkadisa.personalmoviedb.L2.MainActivity.jsonIndicator.setValue(webPage.length());
+                try{
+                    JSONArray jsonArray = new JSONArray(webPage);
+                    com.zkadisa.personalmoviedb.L2.MainActivity.jsonIndicator.setValue(jsonArray.length());
+                }catch (Exception e) {
+                    Log.e("JSON EXCEPTION", e.getMessage(), e);
+                }
             }
         }
     }
