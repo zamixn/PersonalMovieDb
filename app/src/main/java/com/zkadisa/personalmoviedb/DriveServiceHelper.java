@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.util.Pair;
 
 import com.google.android.gms.auth.UserRecoverableAuthException;
@@ -16,6 +17,7 @@ import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 import com.google.api.client.http.ByteArrayContent;
+import com.google.api.client.http.FileContent;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
@@ -26,6 +28,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -63,25 +67,6 @@ public class DriveServiceHelper {
     }
 
     /**
-     * Creates a text file in the user's My Drive folder and returns its file ID.
-     */
-    public Task<String> createFile() {
-        return Tasks.call(mExecutor, () -> {
-            File metadata = new File()
-                    .setParents(Collections.singletonList("root"))
-                    .setMimeType("text/plain")
-                    .setName("Untitled file");
-
-            File googleFile = mDriveService.files().create(metadata).execute();
-            if (googleFile == null) {
-                throw new IOException("Null result when requesting file creation.");
-            }
-
-            return googleFile.getId();
-        });
-    }
-
-    /**
      * Opens the file identified by {@code fileId} and returns a {@link Pair} of its name and
      * contents.
      */
@@ -104,6 +89,25 @@ public class DriveServiceHelper {
 
                 return Pair.create(name, contents);
             }
+        });
+    }
+
+    /**
+     * Creates a text file in the user's My Drive folder and returns its file ID.
+     */
+    public Task<String> createFile(String name) {
+        return Tasks.call(mExecutor, () -> {
+            File metadata = new File()
+                    .setParents(Collections.singletonList("root"))
+                    .setMimeType("text/plain")
+                    .setName(name);
+
+            File googleFile = mDriveService.files().create(metadata).execute();
+            if (googleFile == null) {
+                throw new IOException("Null result when requesting file creation.");
+            }
+
+            return googleFile.getId();
         });
     }
 
@@ -136,6 +140,19 @@ public class DriveServiceHelper {
     public Task<FileList> queryFiles() {
             return Tasks.call(mExecutor, () ->
                     mDriveService.files().list().setSpaces("drive").execute());
+    }
+    public Task<File> GetFileByName(String name){
+        return Tasks.call(mExecutor, () -> {
+            FileList fileList = mDriveService.files().list().setSpaces("drive").execute();
+            List<File> files = fileList.getFiles();
+
+            for (File f :
+                    files) {
+                if (f.getName().equals(name))
+                    return f;
+            }
+            return null;
+        });
     }
 
     /**

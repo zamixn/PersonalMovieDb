@@ -8,6 +8,12 @@ import android.widget.Toast;
 
 import com.zkadisa.personalmoviedb.R;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class Utilities {
     public static void Vibrate(final Context context)
     {
@@ -30,5 +36,24 @@ public class Utilities {
         text.setTextColor(context.getResources().getColor(R.color.colorText));
         toast.show();
 
+    }
+
+    public static String convertStreamToString(InputStream is) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line).append("\n");
+        }
+        reader.close();
+        return sb.toString();
+    }
+
+    public static String getStringFromFile (File file) throws Exception {
+        FileInputStream fin = new FileInputStream(file);
+        String ret = convertStreamToString(fin);
+        //Make sure you close all streams.
+        fin.close();
+        return ret;
     }
 }

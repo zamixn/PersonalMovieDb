@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -114,9 +115,10 @@ public class AccountActivity extends BaseActivityClass {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(AccountActivity.this);
         if(account == null)
             SignInToGoogleServices();
-        else if(connectionType == CONNECTION_TYPE_AUTOLOGIN)
+        else if(connectionType == CONNECTION_TYPE_AUTOLOGIN) {
+            InitiateHelpers(account);
             finish();
-        else
+        }else
             UpdateAccountInformation(account);
     }
 
@@ -161,10 +163,13 @@ public class AccountActivity extends BaseActivityClass {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GOOGLE_SIGN_IN_RESULT_CODE) {
             if(resultCode == RESULT_OK) {
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                InitiateHelpers(task.getResult());
+                MainActivity.LoadDatabase();
+
                 if(connectionType == CONNECTION_TYPE_AUTOLOGIN){
                     finish();
                 }else{
-                    Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                     HandleSignInResult(task);
                 }
             }else{
@@ -186,7 +191,6 @@ public class AccountActivity extends BaseActivityClass {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
-            InitiateHelpers(account);
             DriveServiceHelper.instance.queryFiles().addOnCompleteListener(new OnCompleteListener<FileList>() {
                 @Override
                 public void onComplete(@NonNull Task<FileList> task) {
@@ -195,14 +199,17 @@ public class AccountActivity extends BaseActivityClass {
                         startActivityForResult(e.getIntent(), GOOGLE_SIGN_IN_REQUEST_AUTHORIZATION_CODE);
                     }
                     List<File> files = task.getResult().getFiles();
-                    for (File f :
-                            files) {
-                        Log.i("FileFile", f.getName());
-                    }
                 }
             });
-
-//            driveHelper.createFile();
+//            DriveServiceHelper.instance.readFile("datadb").addOnCompleteListener(new OnCompleteListener<Pair<String, String>>() {
+//                @Override
+//                public void onComplete(@NonNull Task<Pair<String, String>> task) {
+//                    if(task.getException() instanceof UserRecoverableAuthIOException){
+//                        UserRecoverableAuthIOException e = (UserRecoverableAuthIOException)task.getException();
+//                        startActivityForResult(e.getIntent(), GOOGLE_SIGN_IN_REQUEST_AUTHORIZATION_CODE);
+//                    }
+//                }
+//            });
 
             UpdateAccountInformation(account);
             Utilities.ShowCustomToast(this, "Google Sign In Successful.");
@@ -215,7 +222,7 @@ public class AccountActivity extends BaseActivityClass {
 
     private void UpdateAccountInformation(GoogleSignInAccount acct){
         if (acct != null) {
-            InitiateHelpers(acct);
+//            InitiateHelpers(acct);
 
             informationText.setText("");
             explanationText.setText("");

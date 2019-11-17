@@ -25,6 +25,7 @@ import com.zkadisa.personalmoviedb.EntryListItem;
 import com.zkadisa.personalmoviedb.MainActivity;
 import com.zkadisa.personalmoviedb.R;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -74,6 +75,7 @@ public class UserListActivity extends BaseActivityClass {
         registerForContextMenu(userListView);
 
         database = MainActivity.getDatabase();
+
         lists = database.userListDao().getAllUserLists();
         Collections.sort(lists,
                 new Comparator<UserList>() {

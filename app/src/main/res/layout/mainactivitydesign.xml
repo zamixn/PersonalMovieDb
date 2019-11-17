@@ -64,4 +64,27 @@
         android:background="@color/Transparent"
         android:layout_alignParentBottom="true"/>
 
+<!--    <Button-->
+<!--        android:id="@+id/testSaveButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="SAVE"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_alignParentBottom="true"/>-->
+<!--    <Button-->
+<!--        android:id="@+id/testListButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="LIST"-->
+<!--        android:layout_toRightOf="@id/testSaveButton"-->
+<!--        android:layout_alignParentBottom="true"/>-->
+<!--    <Button-->
+<!--        android:id="@+id/testLoadButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="LOAD"-->
+<!--        android:layout_toRightOf="@id/testListButton"-->
+<!--        android:layout_alignParentBottom="true"/>-->
+
+
 </RelativeLayout>

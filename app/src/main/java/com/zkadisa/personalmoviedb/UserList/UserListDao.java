@@ -1,10 +1,14 @@
 package com.zkadisa.personalmoviedb.UserList;
 
+import android.database.Cursor;
+
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.RawQuery;
 import androidx.room.Update;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
 import java.util.List;
 
@@ -28,6 +32,12 @@ public interface UserListDao {
 
     @Query("SELECT * from UserList")
     List<UserList> getAllUserLists();
+
+    @Query("Select * FROM UserList")
+    Cursor getStringToExport();
+
+    @RawQuery
+    Boolean insertDataRawFormat(SupportSQLiteQuery query);
 
 
 }
