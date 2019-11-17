@@ -37,4 +37,9 @@
 
     <string name="accountInformation_connecting">Connecting to google services...</string>
     <string name="accountInformation_failedToConnect">Failed to connect to google services.</string>
+    <string name="accountInformation_reasonToConnect">In order to sync your data with the cloud you need to login to your google account</string>
+    <string name="retryLoginButtonText">Retry</string>
+    <string name="doNotConnectButtonText">Don\'t connect</string>
+    <string name="loginButtonText">Login</string>
+    <string name="logoutButtonText">Logout</string>
 </resources>

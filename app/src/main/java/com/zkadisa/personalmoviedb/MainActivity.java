@@ -96,8 +96,11 @@ public class MainActivity extends BaseActivityClass {
                 .allowMainThreadQueries().build();
         //        context.deleteDatabase("my_database");
 
-//        Header header = (Header) findViewById(R.id.Header);
-
+        if(!DriveServiceHelper.isInitialized()){
+            Intent intent = new Intent(context, AccountActivity.class);
+            intent.putExtra("connectionType", AccountActivity.CONNECTION_TYPE_AUTOLOGIN);
+            context.startActivity(intent);
+        }
     }
 
     public static AppDatabase getDatabase(){

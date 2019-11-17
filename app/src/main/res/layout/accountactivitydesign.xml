@@ -26,4 +26,54 @@
         android:text="connecting"
         android:textAlignment="center"/>
 
+    <TextView
+    android:id="@+id/explanationText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/accountPicture"
+    android:textSize="@dimen/subheaderTextSize"
+    android:text="@string/accountInformation_reasonToConnect"
+    android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/headerTextSize"
+        android:text="@string/loginButtonText"
+        android:layout_below="@+id/explanationText"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"/>
+    
+    <Button
+        android:id="@+id/retryLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/headerTextSize"
+        android:text="@string/retryLoginButtonText"
+        android:layout_below="@+id/informationText"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/doNotConnectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/headerTextSize"
+        android:text="@string/doNotConnectButtonText"
+        android:layout_below="@+id/retryLogin"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"/>
+
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/subheaderTextSize"
+        android:text="@string/logoutButtonText"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="5dp"/>
+
 </RelativeLayout>

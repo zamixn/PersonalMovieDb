@@ -56,6 +56,7 @@ public class BaseActivityClass extends AppCompatActivity {
             }
             case R.id.accountAction: {
                 Intent intent = new Intent(context, AccountActivity.class);
+                intent.putExtra("connectionType", AccountActivity.CONNECTION_TYPE_CHEKCPROFILE);
                 context.startActivity(intent);
                 return true;
             }
