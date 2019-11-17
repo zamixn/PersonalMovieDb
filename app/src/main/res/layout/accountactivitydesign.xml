@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <ImageView
+        android:id="@+id/accountPicture"
+        android:layout_width="@dimen/accountPictureWidth"
+        android:layout_height="@dimen/accountPictureHeight"/>
+
+    <TextView
+        android:id="@+id/accountName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/accountPictureHeight"
+        android:textSize="@dimen/headerTextSize"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/accountPicture"/>
+
+    <TextView
+        android:id="@+id/informationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accountPicture"
+        android:textSize="@dimen/headerTextSize"
+        android:text="connecting"
+        android:textAlignment="center"/>
+
+</RelativeLayout>

@@ -96,18 +96,5 @@ public class BarIndicator extends CustomIndicator {
                     break;
             }
         }
-//        switch (state){
-//            case EXECUTING:
-//                canvas.drawLine(0, height / 2f, (float)width * value, height / 2f, paint);
-//                break;
-//
-//            case SUCCESS:
-//            case FAILED:
-//                canvas.drawLine(0, height / 2f, width, height / 2f, paint);
-//                break;
-//
-//            default:
-//                break;
-//        }
     }
 }

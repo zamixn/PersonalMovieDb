@@ -54,6 +54,11 @@ public class BaseActivityClass extends AppCompatActivity {
                 context.startActivity(intent);
                 return true;
             }
+            case R.id.accountAction: {
+                Intent intent = new Intent(context, AccountActivity.class);
+                context.startActivity(intent);
+                return true;
+            }
             case R.id.lab1Action: {
                 Intent intent = new Intent(context, FirstActivity.class);
                 context.startActivity(intent);

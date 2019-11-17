@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
 
     <application
         android:allowBackup="true"
@@ -34,6 +35,7 @@
         <activity android:name=".UserList.NewUserListActivity"/>
         <activity android:name=".UserList.UserListEditActivity"/>
         <activity android:name=".SearchForEntriesActivity"/>
+        <activity android:name=".AccountActivity" android:launchMode="singleTask"/>
     </application>
 
 </manifest>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "401377549915",
+    "firebase_url": "https://personalmoviedb-257308.firebaseio.com",
+    "project_id": "personalmoviedb-257308",
+    "storage_bucket": "personalmoviedb-257308.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401377549915:android:e3a79e5e54eebcdf7ba97e",
+        "android_client_info": {
+          "package_name": "com.zkadisa.personalmoviedb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401377549915-d3upj9be6vvst65q87ukicnultd967qv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zkadisa.personalmoviedb",
+            "certificate_hash": "fb0529c3238ff65125ae498e1f2c0d095d39add1"
+          }
+        },
+        {
+          "client_id": "401377549915-u5b6jk4a9jk7fcs6cu66oa5gm76cu82d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEFIp8fvVbIZ3ibX0OZscWv0T-jmfF6hc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401377549915-u5b6jk4a9jk7fcs6cu66oa5gm76cu82d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

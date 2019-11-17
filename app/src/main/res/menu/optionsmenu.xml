@@ -6,12 +6,17 @@
     <item android:id="@+id/homeAction"
         android:title="Home"
         android:icon="@drawable/pmdb_logo_txtonly"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
 
     <item android:id="@+id/listAction"
         android:icon="@mipmap/ic_list"
         android:title="User List"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/accountAction"
+    android:icon="@mipmap/ic_account"
+    android:title="Account"
+    app:showAsAction="always"/>
 
     <item android:id="@+id/lab1Action"
         android:title="Lab 1"

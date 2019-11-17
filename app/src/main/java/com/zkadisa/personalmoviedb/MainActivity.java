@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -93,12 +92,12 @@ public class MainActivity extends BaseActivityClass {
             }
         });
 
-//        Header header = (Header) findViewById(R.id.Header);
-
         database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "my_database")
                 .allowMainThreadQueries().build();
+        //        context.deleteDatabase("my_database");
 
-//        context.deleteDatabase("my_database");
+//        Header header = (Header) findViewById(R.id.Header);
+
     }
 
     public static AppDatabase getDatabase(){

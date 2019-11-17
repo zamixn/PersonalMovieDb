@@ -34,4 +34,7 @@
     <string name="newUserList_saveButton">Save</string>
 
     <string name="userlistoptions_remove">Remove</string>
+
+    <string name="accountInformation_connecting">Connecting to google services...</string>
+    <string name="accountInformation_failedToConnect">Failed to connect to google services.</string>
 </resources>

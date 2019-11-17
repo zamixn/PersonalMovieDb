@@ -7,9 +7,22 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestInitializer;
+import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.services.drive.Drive;
+import com.google.api.services.drive.DriveScopes;
 import com.zkadisa.personalmoviedb.DataHandling.WebPageDownloader;
+import com.zkadisa.personalmoviedb.DriveServiceHelper;
 import com.zkadisa.personalmoviedb.Misc.CustomIndicator;
 import com.zkadisa.personalmoviedb.R;
+
+import java.io.IOException;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 System.gc();
             }
         });
-
-
     }
 
 
