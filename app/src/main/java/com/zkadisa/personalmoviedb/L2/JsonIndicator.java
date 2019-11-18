@@ -43,6 +43,9 @@ public class JsonIndicator extends View {
         paint.setStyle(Paint.Style.FILL);
         canvas.drawPaint(paint);
 
+        paint.setColor(Color.CYAN);
+        canvas.drawRect(10, 10, width - 10, height - 10, paint);
+
         paint.setColor(Color.BLACK);
         paint.setTextSize(40);
         canvas.drawText(value + "", width / 2, height / 2, paint);

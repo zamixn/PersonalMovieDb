@@ -81,7 +81,7 @@ public class UserListEditActivity extends BaseActivityClass {
                                         event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                             if (event == null || !event.isShiftPressed()) {
                                 // the user is done typing.
-
+                                Log.i("DetailsActivity", "Saving title " + titleTextView.getText().toString());
                                 if(!titleTextView.getText().toString().equals(mList.getTitle())){
                                     mList.setTitle(titleTextView.getText().toString());
                                     wasModified = true;
