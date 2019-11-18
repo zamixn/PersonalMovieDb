@@ -4,11 +4,6 @@
     android:layout_height="match_parent"
     android:focusableInTouchMode="true">
 
-    <!--    <com.zkadisa.personalmoviedb.Misc.Header-->
-    <!--        android:id="@+id/Header"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"/>-->
-
     <EditText
         android:id="@+id/listTitleView"
         android:layout_width="match_parent"
@@ -17,7 +12,32 @@
         android:textSize="@dimen/headerTextSize"
         android:textAlignment="center"
         android:singleLine="true"
+        android:imeOptions="actionDone"
         android:layout_marginBottom="10dp"/>
+
+    <ImageButton
+        android:id="@+id/userlist_edittitle"
+        android:layout_width="@dimen/userListDetailsbuttonsSize"
+        android:layout_height="@dimen/userListDetailsbuttonsSize"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_edit"
+        android:background="@android:color/transparent"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="5dp"/>
+    <ImageButton
+        android:id="@+id/userlist_savetitle"
+        android:layout_width="@dimen/userListDetailsbuttonsSize"
+        android:layout_height="@dimen/userListDetailsbuttonsSize"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_checkmark"
+        android:background="@android:color/transparent"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="5dp"/>
+
+
+
 
     <ListView
         android:id="@+id/userListView"

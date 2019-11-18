@@ -11,7 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -49,6 +51,9 @@ public class UserListEditActivity extends BaseActivityClass {
     private List<EntryListItem> items;
     private EntryListAdapter adapter;
 
+    private ImageButton titleEditButton;
+    private ImageButton titleSaveButton;
+
     private AppDatabase database;
 
     private UserList mList;
@@ -61,41 +66,48 @@ public class UserListEditActivity extends BaseActivityClass {
         setContentView(R.layout.userlisteditactivitydesign);
 
         titleTextView = findViewById(R.id.listTitleView);
-        titleTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        titleTextView.setEnabled(false);
+        titleEditButton = findViewById(R.id.userlist_edittitle);
+        titleEditButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-                Log.i("Toogle", b + "");
-                if(b)
-                    titleTextView.setText(mList.getTitle());
-                else
-                    titleTextView.setText(mList.getDisplayTitle());
+            public void onClick(View view) {
+                titleTextView.setEnabled(true);
+                titleTextView.requestFocus();
+                titleTextView.setText(mList.getTitle());
+                titleTextView.setSelection(titleTextView.getText().toString().length());
+                MainActivity.showSoftKeyboard(UserListEditActivity.this, titleTextView);
+                titleEditButton.setVisibility(View.GONE);
+                titleSaveButton.setVisibility(View.VISIBLE);
             }
         });
-        titleTextView.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                                actionId == EditorInfo.IME_ACTION_DONE ||
-                                event != null &&
-                                        event.getAction() == KeyEvent.ACTION_DOWN &&
-                                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                            if (event == null || !event.isShiftPressed()) {
-                                // the user is done typing.
-                                Log.i("DetailsActivity", "Saving title " + titleTextView.getText().toString());
-                                if(!titleTextView.getText().toString().equals(mList.getTitle())){
-                                    mList.setTitle(titleTextView.getText().toString());
-                                    wasModified = true;
-                                    database.userListDao().update(mList);
-                                }
-                                titleTextView.setText(mList.getDisplayTitle());
-                                MainActivity.hideSoftKeyboard(UserListEditActivity.this, v);
-                                return true; // consume.
-                            }
-                        }
-                        return false; // pass on to other listeners.
-                    }
+        titleSaveButton = findViewById(R.id.userlist_savetitle);
+        titleSaveButton.setVisibility(View.GONE);
+        titleSaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                titleEditButton.setVisibility(View.VISIBLE);
+                titleSaveButton.setVisibility(View.GONE);
+                if(!titleTextView.getText().toString().equals(mList.getTitle())){
+                    mList.setTitle(titleTextView.getText().toString());
+                    wasModified = true;
+                    database.userListDao().update(mList);
                 }
-        );
+                titleTextView.setText(mList.getDisplayTitle());
+                titleTextView.setEnabled(false);
+                MainActivity.hideSoftKeyboard(UserListEditActivity.this, titleTextView);
+            }
+        });
+        titleTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    titleSaveButton.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         addButton = findViewById(R.id.addNewUserList);
         userListView = findViewById(R.id.userListView);
 
