@@ -1,5 +1,6 @@
 package com.zkadisa.personalmoviedb;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,26 +13,31 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.zkadisa.personalmoviedb.DataHandling.OMDbReader;
+import com.zkadisa.personalmoviedb.Misc.CustomIndicator;
 import com.zkadisa.personalmoviedb.Misc.ScrollListView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SearchForEntriesActivity extends BaseActivityClass {
+public class SearchActivity extends BaseActivityClass {
 
     private Context context = this;
 
     private EditText searchQueryEditText;
+
     private Button searchButton;
 
     private ScrollListView searchList;
     private SearchResultListAdapter adapter;
+
+    public static CustomIndicator customIndicator;
 
     private long previousBottomScrollTime = -500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.searchforentriesactivitydesign);
+        setContentView(R.layout.searchactivitydesign);
 
         searchQueryEditText = findViewById(R.id.searchPhraseEditText);
         searchButton = findViewById(R.id.search_button);
@@ -44,10 +50,9 @@ public class SearchForEntriesActivity extends BaseActivityClass {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 SearchEntryListItem item = (SearchEntryListItem) searchList.getItemAtPosition(i);
-                Intent intent = new Intent();
-                intent.putExtra("data", item);
-                setResult(RESULT_OK, intent);
-                finish();
+                Intent intent = new Intent(context, DetailsActivity.class);
+                intent.putExtra("data", (Serializable) item);
+                context.startActivity(intent);
             }
         });
         searchList.setOnBottomReachedListener(new ScrollListView.OnBottomReachedListener() {
@@ -59,12 +64,14 @@ public class SearchForEntriesActivity extends BaseActivityClass {
                 }
             }
         });
+
+        customIndicator = findViewById(R.id.downloadProgressBar);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 adapter.clear();
                 OMDbReader.SearchOMDb(searchQueryEditText.getText().toString(), false, adapter);
-                MainActivity.hideSoftKeyboard(SearchForEntriesActivity.this, view);
+                MainActivity.hideSoftKeyboard(SearchActivity.this, view);
             }
         });
         searchQueryEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {

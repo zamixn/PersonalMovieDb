@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -46,6 +45,11 @@ public class BaseActivityClass extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.homeAction: {
                 Intent intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
+                return true;
+            }
+            case R.id.searchAction: {
+                Intent intent = new Intent(context, SearchActivity.class);
                 context.startActivity(intent);
                 return true;
             }

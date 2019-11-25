@@ -55,16 +55,14 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/addNewUserList"/>
 
-    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-    <!--        android:id="@+id/ButtonRemoveList"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_alignParentRight="true"-->
-    <!--        android:layout_alignParentBottom="true"-->
-    <!--        android:layout_marginBottom="25dp"-->
-    <!--        android:layout_marginRight="25dp"-->
-    <!--        android:src="@mipmap/ic_remove"-->
-    <!--        ></com.google.android.material.floatingactionbutton.FloatingActionButton>-->
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/shareButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_marginRight="25dp"-->
+<!--        android:src="@mipmap/ic_share"-->
+<!--        android:layout_above="@id/addNewUserList"/>-->
 
 
 </RelativeLayout>

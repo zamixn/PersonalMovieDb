@@ -8,6 +8,11 @@
         android:icon="@drawable/pmdb_logo_txtonly"
         app:showAsAction="always"/>
 
+    <item android:id="@+id/searchAction"
+        android:title="Home"
+        android:icon="@mipmap/ic_search_light"
+        app:showAsAction="always"/>
+
     <item android:id="@+id/listAction"
         android:icon="@mipmap/ic_list"
         android:title="User List"

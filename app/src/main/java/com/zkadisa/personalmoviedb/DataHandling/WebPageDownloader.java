@@ -3,12 +3,10 @@ package com.zkadisa.personalmoviedb.DataHandling;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.zkadisa.personalmoviedb.Misc.CustomIndicator;
-import com.zkadisa.personalmoviedb.MainActivity;
+import com.zkadisa.personalmoviedb.SearchActivity;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -58,7 +56,7 @@ public class WebPageDownloader extends AsyncTask<String, Void, String> {
     }
 
     private static String DownloadWebPage(String webpage){
-        return  DownloadWebPage(webpage, instance.type == MAIN ? MainActivity.customIndicator :
+        return  DownloadWebPage(webpage, instance.type == MAIN ? SearchActivity.customIndicator :
                 com.zkadisa.personalmoviedb.L2.MainActivity.customIndicator);
     }
 

@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -32,6 +31,7 @@ import com.zkadisa.personalmoviedb.DetailsActivity;
 import com.zkadisa.personalmoviedb.EntryListAdapter;
 import com.zkadisa.personalmoviedb.EntryListItem;
 import com.zkadisa.personalmoviedb.MainActivity;
+import com.zkadisa.personalmoviedb.SearchActivity;
 import com.zkadisa.personalmoviedb.Misc.Utilities;
 import com.zkadisa.personalmoviedb.R;
 import com.zkadisa.personalmoviedb.SearchEntryListItem;
@@ -150,6 +150,25 @@ public class UserListEditActivity extends BaseActivityClass {
                 startActivityForResult(intent, 1);
             }
         });
+//        FloatingActionButton shareButton = findViewById(R.id.shareButton);
+//        shareButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent sendIntent = new Intent();
+//                sendIntent.setAction(Intent.ACTION_SEND);
+//                StringBuilder builder = new StringBuilder();
+//                String text = "I'm so enjoying these movies!!!!!!!\n";
+//                builder.append(text);
+//                for (int i = 0; i < mList.idList.size(); i++){
+//                    builder.append(OMDbReader.GetURlFromID(mList.idList.get(i)));
+//                }
+//                sendIntent.putExtra(Intent.EXTRA_TEXT, builder.toString());
+//                sendIntent.setType("text/plain");
+//
+//                Intent shareIntent = Intent.createChooser(sendIntent, null);
+//                startActivity(shareIntent);
+//            }
+//        });
 
         userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.zkadisa.personalmoviedb.BaseActivityClass;
 import com.zkadisa.personalmoviedb.MainActivity;
+import com.zkadisa.personalmoviedb.SearchActivity;
 import com.zkadisa.personalmoviedb.Misc.Utilities;
 import com.zkadisa.personalmoviedb.R;
 

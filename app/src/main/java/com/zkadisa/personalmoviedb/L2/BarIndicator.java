@@ -77,10 +77,10 @@ public class BarIndicator extends CustomIndicator {
         float valuePerBar = 1f / barCount;
 
         paint.setStrokeWidth(getResources().getDimension(R.dimen.downloadProgressBarHeight_Bar));
-        Log.i("color:", value + " " + String.format("0x%08X", getColor(value)));
 
         for (float x = barWidth, v = valuePerBar; x <= (float)width * value; x += barWidth, v += valuePerBar)
         {
+//            Log.i("color:", v + " " + String.format("0x%08X", getColor(v)) + " " + getColor(v));
             paint.setColor(getColor(v));
             switch (state){
                 case EXECUTING:

@@ -86,6 +86,11 @@ public class OMDbReader {
         }
     }
 
+    public static String GetURlFromID(String id){
+        String url = String.format("%s%s/", "https://www.imdb.com/title/", id);
+        return  url;
+    }
+
     public static int GetPageNumber()
     {
         return pageNumber;

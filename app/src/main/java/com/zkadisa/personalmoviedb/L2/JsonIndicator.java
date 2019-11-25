@@ -5,11 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-
-import com.zkadisa.personalmoviedb.MainActivity;
-import com.zkadisa.personalmoviedb.R;
 
 public class JsonIndicator extends View {
 

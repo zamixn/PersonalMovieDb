@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.zkadisa.personalmoviedb.L1.FirstActivity;
-import com.zkadisa.personalmoviedb.MainActivity;
+import com.zkadisa.personalmoviedb.SearchActivity;
 import com.zkadisa.personalmoviedb.R;
 import com.zkadisa.personalmoviedb.UserList.UserListActivity;
 
@@ -73,7 +73,7 @@ public class Header extends RelativeLayout {
             @Override
             public void onClick(View view) {
                 Utilities.Vibrate(context);
-                Intent intent = new Intent(context, MainActivity.class);
+                Intent intent = new Intent(context, SearchActivity.class);
                 context.startActivity(intent);
             }
         });

@@ -24,6 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SearchActivity" android:launchMode="singleTask"/>
         <activity android:name=".L1.FirstActivity"/>
         <activity android:name=".L1.SecondActivity"/>
         <activity android:name=".L1.ThirdActivity"/>

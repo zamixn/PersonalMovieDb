@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/SearchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackgroundDarker">
+
+
+        <EditText
+            android:id="@+id/searchPhraseEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:gravity="right"
+            android:hint="@string/searchLabel"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="@dimen/lookingGlassSize"
+            android:layout_height="@dimen/lookingGlassSize"
+            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@+id/searchPhraseEditText"
+            android:textSize="@dimen/mainButtonTextSize"
+            android:background="@mipmap/ic_search_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/searchPhraseEditText"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.zkadisa.personalmoviedb.Misc.ScrollListView
+        android:id="@+id/searchEntryListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/SearchBar"
+        android:scrollbarThumbVertical="@drawable/custom_scroll_style"/>
+
+    <com.zkadisa.personalmoviedb.Misc.CustomIndicator
+        android:id="@+id/downloadProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/downloadProgressBarHeight"
+        android:background="@color/Transparent"
+        android:layout_alignParentBottom="true"/>
+
+<!--    <Button-->
+<!--        android:id="@+id/testSaveButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="SAVE"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_alignParentBottom="true"/>-->
+<!--    <Button-->
+<!--        android:id="@+id/testListButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="LIST"-->
+<!--        android:layout_toRightOf="@id/testSaveButton"-->
+<!--        android:layout_alignParentBottom="true"/>-->
+<!--    <Button-->
+<!--        android:id="@+id/testLoadButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="LOAD"-->
+<!--        android:layout_toRightOf="@id/testListButton"-->
+<!--        android:layout_alignParentBottom="true"/>-->
+
+
+</RelativeLayout>

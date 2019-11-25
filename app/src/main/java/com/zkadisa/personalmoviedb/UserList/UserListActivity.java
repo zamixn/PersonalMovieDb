@@ -14,18 +14,12 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.JsonObject;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
 import com.zkadisa.personalmoviedb.AppDatabase;
 import com.zkadisa.personalmoviedb.BaseActivityClass;
-import com.zkadisa.personalmoviedb.DataHandling.Entry;
-import com.zkadisa.personalmoviedb.DataHandling.OMDbReader;
-import com.zkadisa.personalmoviedb.EntryListItem;
 import com.zkadisa.personalmoviedb.MainActivity;
+import com.zkadisa.personalmoviedb.SearchActivity;
 import com.zkadisa.personalmoviedb.R;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
