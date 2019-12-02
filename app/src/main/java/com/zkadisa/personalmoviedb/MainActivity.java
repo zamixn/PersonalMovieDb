@@ -9,6 +9,11 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,10 +26,20 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 import com.zkadisa.personalmoviedb.DataHandling.CSVReader;
 import com.zkadisa.personalmoviedb.DataHandling.CSVWriter;
+import com.zkadisa.personalmoviedb.DataHandling.Entry;
+import com.zkadisa.personalmoviedb.DataHandling.OMDbReader;
+import com.zkadisa.personalmoviedb.DataHandling.TMDbExternalIDs;
+import com.zkadisa.personalmoviedb.DataHandling.TMDbReader;
+import com.zkadisa.personalmoviedb.DataHandling.TMDbSearchResult;
 import com.zkadisa.personalmoviedb.Misc.Utilities;
 
+import java.io.Serializable;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.List;
@@ -35,10 +50,21 @@ public class MainActivity extends BaseActivityClass{
     private static MainActivity instance;
     private static AppDatabase database;
 
+    private static Gson gson = new Gson();
+
+    private LinearLayout upcomingMovieContainer;
+    private LinearLayout popularMovieContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.mainactivitydesign);
         instance = this;
+
+        upcomingMovieContainer = findViewById(R.id.upcomingMovieContainer);
+        popularMovieContainer = findViewById(R.id.popularMovieContainer);
+        DownloadFromTMDbToHorizontalScrollView(TMDbReader.GetTopUpcomingMoviesURL(), 10, upcomingMovieContainer);
+        DownloadFromTMDbToHorizontalScrollView(TMDbReader.GetPopularMoviesURL(), 10, popularMovieContainer);
 
 //        findViewById(R.id.testLoadButton).setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -68,6 +94,69 @@ public class MainActivity extends BaseActivityClass{
             intent.putExtra("connectionType", AccountActivity.CONNECTION_TYPE_AUTOLOGIN);
             startActivityForResult (intent, 0);
         }
+    }
+
+    private void DownloadFromTMDbToHorizontalScrollView(String url, int count, LinearLayout linearLayout){
+        Ion.with(context)
+                .load(url)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        if(e != null){
+                            Log.e("MainActivity_159", e.getMessage());
+                            return;
+                        }
+                        TMDbSearchResult searchResult = gson.fromJson(result, TMDbSearchResult.class);
+
+                        for (int i = 0; i < searchResult.total_results && i < count; i++){
+                            Ion.with(context)
+                                    .load(TMDbReader.GetExternalIDsURL(searchResult.results[i].id))
+                                    .asJsonObject()
+                                    .setCallback(new FutureCallback<JsonObject>() {
+                                        @Override
+                                        public void onCompleted(Exception e, JsonObject result) {
+                                            if(e != null){
+                                                Log.e("MainActivity_172", e.getMessage());
+                                                return;
+                                            }
+                                            TMDbExternalIDs searchResult = gson.fromJson(result, TMDbExternalIDs.class);
+                                            Ion.with(context)
+                                                    .load(OMDbReader.GetSearchByIDURL(searchResult.imdb_id))
+                                                    .asJsonObject()
+                                                    .setCallback(new FutureCallback<JsonObject>() {
+                                                        @Override
+                                                        public void onCompleted(Exception e, JsonObject result) {
+                                                            if(e != null){
+                                                                Log.e("MainActivity_183", e.getMessage());
+                                                                return;
+                                                            }
+                                                            Entry entry  = gson.fromJson(result, Entry.class);
+                                                            LinearLayout layout = (LinearLayout)View.inflate(MainActivity.this, R.layout.horizontalentrylayoutitem, null);
+                                                            ((TextView)layout.findViewById(R.id.textView)).setText(entry.Title);
+                                                            ((TextView)layout.findViewById(R.id.subTextView)).setText(entry.Released);
+                                                            ImageButton imageButton = layout.findViewById(R.id.posterImageView);
+                                                            Ion.with((ImageView)imageButton).load(entry.Poster);
+                                                            imageButton.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View view) {
+                                                                    SearchEntryListItem item = new SearchEntryListItem(entry.Title, entry.Year, entry.imdbID, entry.Type, entry.Poster);
+                                                                    Intent intent = new Intent(context, DetailsActivity.class);
+                                                                    intent.putExtra("data", (Serializable) item);
+                                                                    context.startActivity(intent);
+                                                                }
+                                                            });
+                                                            linearLayout.addView(layout);
+
+                                                        }
+                                                    });
+
+                                        }
+                                    });
+                        }
+
+                    }
+                });
     }
 
     //    @Override

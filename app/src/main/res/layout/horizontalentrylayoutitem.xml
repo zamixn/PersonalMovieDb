@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/posterImageView"
+        android:layout_width="@dimen/searchEntryPosterWidth"
+        android:layout_height="@dimen/searchEntryPosterHeight"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="@dimen/searchEntryPosterWidth"
+        android:layout_height="wrap_content"
+        android:text="text"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/subTextView"
+        android:layout_width="@dimen/searchEntryPosterWidth"
+        android:layout_height="wrap_content"
+        android:text="subText"
+        android:gravity="center"
+        android:textColor="@color/colorSubText"
+        android:layout_marginBottom="5dp"/>
+
+</LinearLayout>

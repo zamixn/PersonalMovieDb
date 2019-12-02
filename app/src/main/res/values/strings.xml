@@ -43,4 +43,7 @@
     <string name="doNotConnectButtonText">Don\'t connect</string>
     <string name="loginButtonText">Login</string>
     <string name="logoutButtonText">Logout</string>
+
+    <string name="upcomingMoviesText">Top Upcoming</string>
+    <string name="popularMoviesText">Popular</string>
 </resources>
