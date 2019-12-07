@@ -24,6 +24,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.Image;
 import android.media.ImageReader;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -59,7 +60,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity  extends BaseActivityClass implements SensorEventListener, LocationListener {
+public class MainActivity  extends BaseActivityClass implements SensorEventListener {
 
     private Context context = this;
     private static final String CAM_TAG = "Camera";
@@ -76,6 +77,8 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
     private TextView orientation;
     private TextView longitude_gps;
     private TextView latitude_gps;
+    private TextView longitude_network;
+    private TextView latitude_network;
 
     private boolean InformationObtained;
 
@@ -106,6 +109,11 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
 
+    private boolean photo_took = false;
+    private boolean stopped = false;
+    private boolean sos_sent = false;
+    private boolean flashLightStatus = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +143,8 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
         orientation = findViewById(R.id.orientation);
         longitude_gps = findViewById(R.id.longitude_gps);
         latitude_gps = findViewById(R.id.latitude_gps);
+        longitude_network = findViewById(R.id.longitude_network);
+        latitude_network = findViewById(R.id.latitude_network);
 
         senSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -145,7 +155,14 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
         tvHeading = (TextView) findViewById(R.id.tvHeading);
 
 
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.System.canWrite(context)) {
+                Log.i("Requesting_permission", "asd");
+                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                intent.setData(Uri.parse("package:" + context.getPackageName()));
+                startActivity(intent);
+            }
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -156,10 +173,10 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
                         10);
             }
             else
-                this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
+                requestLocationUpdates();
         }
         else
-            this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
+            requestLocationUpdates();
 
 
         textureView = findViewById(R.id.texture_view);
@@ -173,7 +190,6 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
                 takePicture();
             }
         });
-
     }
 
     @Override
@@ -182,7 +198,7 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
         switch (requestCode){
             case 10:
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                    this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
+                    requestLocationUpdates();
                 break;
             case REQUEST_CAMERA_PERMISSION:
                 if(grantResults[0] == PackageManager.PERMISSION_DENIED){
@@ -216,9 +232,7 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
 
         // compass
         if(mySensor.getType() == Sensor.TYPE_ORIENTATION) {
-            // get the angle around the z-axis rotated
             float degree = Math.round(event.values[0]);
-
             tvHeading.setText("Heading: " + Float.toString(degree) + " degrees");
 
             // create a rotation animation (reverse turn degree degrees)
@@ -239,9 +253,148 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
             image.startAnimation(ra);
             currentDegree = -degree;
 
-            if(currentDegree > 355 || currentDegree < 5){
+            // take photo if heading is north-ish
+            if(!photo_took &&(degree > 359 || degree < 1)){
+                Log.i(CAM_TAG, "taking photo " + degree);
+                takePicture();
+                Log.i(CAM_TAG, "photo took" + degree);
+                photo_took = true;
+            }else if(degree < 358 && degree > 2)
+                photo_took = false;
+
+            // sos flash if heading south-ish
+            if(!sos_sent && (degree > 179 && degree < 181)){
+                closeCamera();
+                Log.i("SOS", "sending flash");
+                send_sos();
+                sos_sent = true;
+            }
+        }
+
+        //brightness
+        if(mySensor.getType() == Sensor.TYPE_ORIENTATION) {
+            double degree = event.values[1] % 90;
+            int brightness = (int)Math.round(Math.abs(degree) / 90.0 * 255.0);
+            if(Math.abs(event.values[1]) > 90)
+                brightness = 255 - brightness;
+            boolean writeAllowed = false;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if(Settings.System.canWrite(context))
+                    writeAllowed = true;
+            }else
+                writeAllowed = true;
+            if(writeAllowed) {
+                Settings.System.putInt(context.getContentResolver(),
+                        Settings.System.SCREEN_BRIGHTNESS, brightness);
+            }
+        }
+    }
+
+    private void send_sos(){
+        final long short_flash_time = 150;
+        final long long_flash_time = 300;
+        final long between_flash_time = 150;
+        final long short_flash_wait_time = short_flash_time + between_flash_time;
+        final long long_flash_wait_time = long_flash_time + between_flash_time;
+
+        final Handler handler = new Handler();
+        Runnable shortFlash = new Runnable() {
+            @Override
+            public void run() {
+                flashLightOn();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        flashLightOff();
+                    }
+                }, short_flash_time);
 
             }
+        };
+        Runnable longFlash = new Runnable() {
+            @Override
+            public void run() {
+                flashLightOn();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        flashLightOff();
+                    }
+                }, long_flash_time);
+            }
+        };
+
+        Runnable short_triple_flash = new Runnable() {
+            @Override
+            public void run() {
+                handler.post(shortFlash);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        handler.post(shortFlash);
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                handler.post(shortFlash);
+                            }
+                        }, short_flash_wait_time);
+                    }
+                }, short_flash_wait_time);
+            }
+        };
+        Runnable long_triple_flash = new Runnable() {
+            @Override
+            public void run() {
+                handler.post(longFlash);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        handler.post(longFlash);
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                handler.post(longFlash);
+                            }
+                        }, long_flash_wait_time);
+                    }
+                }, long_flash_wait_time);
+            }
+        };
+
+        handler.postDelayed(short_triple_flash, 0);
+        handler.postDelayed(long_triple_flash, short_flash_wait_time * 3 + between_flash_time);
+        handler.postDelayed(short_triple_flash, short_flash_wait_time * 3 + long_flash_wait_time * 3 + between_flash_time * 2);
+        handler.postDelayed(() -> sos_sent = false, short_flash_wait_time * 3 + long_flash_wait_time * 3 + between_flash_time * 2);
+    }
+    private void flashLightOn() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return;
+        }
+        CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+
+        Log.i("Flashlight", "turning on");
+
+        try {
+            String cameraId = cameraManager.getCameraIdList()[0];
+            cameraManager.setTorchMode(cameraId, true);
+            flashLightStatus = true;
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
+    }
+    private void flashLightOff() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return;
+        }
+        CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+
+        Log.i("Flashlight", "turning off");
+        try {
+            String cameraId = cameraManager.getCameraIdList()[0];
+            cameraManager.setTorchMode(cameraId, false);
+            flashLightStatus = false;
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
         }
     }
 
@@ -272,7 +425,9 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
     @Override
     protected void onPause() {
         super.onPause();
-        stopBackgroundThread();
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_SETTINGS) == PackageManager.PERMISSION_GRANTED) {
+            stopBackgroundThread();
+        }
         if(senAccelerometer != null){
             senSensorManager.unregisterListener(MainActivity.this, senAccelerometer);
             senSensorManager.unregisterListener(MainActivity.this, senOrientation);
@@ -281,56 +436,95 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
         && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             return;
 
-        this.locationManager.removeUpdates(this);
+        this.locationManager.removeUpdates(gps_location_listener);
+        this.locationManager.removeUpdates(network_location_listener);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        startBackgroundThread();
-        if(textureView.isAvailable()){
-            openCamera();
-        }else{
-            textureView.setSurfaceTextureListener(textureListener);
+        if(stopped){
+            startBackgroundThread();
+            if (textureView.isAvailable()) {
+                openCamera();
+            } else {
+                textureView.setSurfaceTextureListener(textureListener);
+            }
         }
 
         if(senAccelerometer != null) {
             senSensorManager.registerListener(MainActivity.this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
             senSensorManager.registerListener(MainActivity.this, senOrientation, SensorManager.SENSOR_DELAY_GAME);
         }
+        requestLocationUpdates();
+    }
+
+    private void requestLocationUpdates(){
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
             return;
-        this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
-    }
+        this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, gps_location_listener);
+        this.locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 400, 0, network_location_listener);
 
-    @Override
-    public void onLocationChanged(Location location) {
-        Log.i("location", location == null ? "null" : location.getProvider());
-        if(location != null){
-            longitude_gps.setText(String.valueOf(location.getLongitude()));
-            latitude_gps.setText(String.valueOf(location.getLatitude()));
+    }
+    LocationListener gps_location_listener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            Log.i("location", location == null ? "null" : location.getProvider());
+            if (location != null) {
+                longitude_gps.setText(String.valueOf(location.getLongitude()));
+                latitude_gps.setText(String.valueOf(location.getLatitude()));
+            }
+
         }
 
-    }
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+            Log.i("location", "status changed");
+        }
 
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-        Log.i("location", "status changed");
-    }
+        @Override
+        public void onProviderEnabled(String s) {
+            Log.i("location", "enabled");
 
-    @Override
-    public void onProviderEnabled(String s) {
-        Log.i("location", "enabled");
+        }
 
-    }
+        @Override
+        public void onProviderDisabled(String s) {
+            Log.i("location", "disabled");
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
+    };
+    LocationListener network_location_listener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            Log.i("location", location == null ? "null" : location.getProvider());
+            if(location != null){
+                longitude_network.setText(String.valueOf(location.getLongitude()));
+                latitude_network.setText(String.valueOf(location.getLatitude()));
+            }
 
-    @Override
-    public void onProviderDisabled(String s) {
-        Log.i("location", "disabled");
-        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        startActivity(intent);
-    }
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+            Log.i("location", "status changed");
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+            Log.i("location", "enabled");
+
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+            Log.i("location", "disabled");
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
+    };
 
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
         @Override
@@ -459,7 +653,13 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
                         output = new FileOutputStream(file);
                         output.write(bytes);
                     }finally {
-                        if(null != output) {output.close();}
+                        if(null != output) {
+                            output.close();
+                            closeCamera();
+                            Intent intent = new Intent(context, ImageFromFileActivity.class);
+                            intent.putExtra("path", file.getAbsolutePath());
+                            startActivity(intent);
+                        }
                     }
                 }
             };
@@ -559,6 +759,7 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
     }
 
     private void closeCamera(){
+        stopped = true;
         if(null != cameraDevice){
             cameraDevice.close();
             cameraDevice = null;
