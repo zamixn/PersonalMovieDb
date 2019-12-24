@@ -27,6 +27,7 @@ import android.media.ImageReader;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -228,6 +229,11 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
             zValue.setText(String.valueOf(z));
 
             orientation.setText(getAccelerometerString(x, y, z));
+
+            if(z < -9) {
+                Log.i("APP_EXIT", "exiting");
+                moveTaskToBack(true);
+            }
         }
 
         // compass
@@ -362,9 +368,12 @@ public class MainActivity  extends BaseActivityClass implements SensorEventListe
         };
 
         handler.postDelayed(short_triple_flash, 0);
-        handler.postDelayed(long_triple_flash, short_flash_wait_time * 3 + between_flash_time);
-        handler.postDelayed(short_triple_flash, short_flash_wait_time * 3 + long_flash_wait_time * 3 + between_flash_time * 2);
-        handler.postDelayed(() -> sos_sent = false, short_flash_wait_time * 3 + long_flash_wait_time * 3 + between_flash_time * 2);
+        handler.postDelayed(long_triple_flash,
+           short_flash_wait_time * 3 + between_flash_time);
+        handler.postDelayed(short_triple_flash,
+           short_flash_wait_time * 3 + long_flash_wait_time * 3 + between_flash_time * 2);
+        handler.postDelayed(() -> sos_sent = false,
+           short_flash_wait_time * 3 + long_flash_wait_time * 3 + between_flash_time * 2);
     }
     private void flashLightOn() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
